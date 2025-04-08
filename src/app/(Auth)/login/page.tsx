@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -37,7 +37,7 @@ const Login: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex flex-col justify-center items-center px-4">
       <Head>
-        <title>Login | Saylani Student Portal</title>
+        <title>Login | Job Portal</title>
         <meta name="description" content="Login to access your Saylani Student Portal" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -47,7 +47,7 @@ const Login: React.FC = () => {
           <div className="flex justify-center">
             <div className="relative h-20 w-40">
               <Image
-                src="/saylani-logo.png"
+                src="/saylani_logo.png"
                 alt="Saylani Welfare Trust"
                 layout="fill"
                 objectFit="contain"
@@ -55,9 +55,9 @@ const Login: React.FC = () => {
               />
             </div>
           </div>
-          <h2 className="mt-6 text-2xl font-bold text-gray-900">Student Portal</h2>
+          <h2 className="mt-2 text-2xl font-bold text-gray-900">Job Portal</h2>
           <p className="mt-2 text-sm text-gray-600">
-            Sign in to access your student account
+            Sign in to access your saylani job portal account
           </p>
         </div>
 
@@ -88,7 +88,7 @@ const Login: React.FC = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
+                className="appearance-none mb-2 rounded-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
               />
             </div>
@@ -102,7 +102,7 @@ const Login: React.FC = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full mt-4 px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
               />
             </div>
