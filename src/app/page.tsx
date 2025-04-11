@@ -6,10 +6,9 @@ import HeroSection from "@/components/HeroSection/heroSection";
 export default async function Home() {
   await ConnectDB();
   return (
-    <div className="container mx-auto border border-gray-500">
+    <div className="">
       <Navbar />
       <HeroSection />
-      <h1>hello world</h1>
     </div>
   );
 }
