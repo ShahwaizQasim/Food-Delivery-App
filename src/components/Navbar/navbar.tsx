@@ -10,14 +10,13 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
-      <div className="container mx-auto px-10 py-6">
+      <div className="container mx-auto px-10 py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="font-bold text-2xl text-saylani-green">Saylani</div>
-            <div className="font-semibold text-xl text-saylani-dark-gray">
-              Jobs
-            </div>
+          <div className="h-12 w-48">
+            <img src="/saylani_logo.png" alt="saylani_logo" height={"100%"} width={"100%"} />
+          </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -51,13 +50,13 @@ const Navbar = () => {
           {/* Auth Buttons (Desktop) */}
           <div className="hidden md:flex items-center space-x-3">
             <Link href="/login">
-              <Button variant="outline" className="flex items-center gap-2 cursor-pointer hover:bg-saylani-green">
+              <Button variant="outline" className="flex items-center gap-2 cursor-pointer hover:bg-green-500 hover:text-white">
                 <LogIn size={18} />
                 Login
               </Button>
             </Link>
             <Link href="/signup">
-              <Button variant={"outline"} className="bg-saylani-green hover:bg-saylani-dark-green flex items-center gap-2 cursor-pointer">
+              <Button variant={"outline"} className="bg-green-500 hover:bg-white hover:text-black flex items-center gap-2 cursor-pointer px-4 text-white">
                 <User size={18} />
                 Sign Up
               </Button>
