@@ -1,4 +1,4 @@
-import DashboardContent from "@/app/components/dashboardContent/dashboardContent";
+import DashboardContent from "@/components/dashboardContent/dashboardContent";
 
 export default function Dashboard() {
   return (

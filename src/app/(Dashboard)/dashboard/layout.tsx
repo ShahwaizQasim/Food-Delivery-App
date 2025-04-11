@@ -1,6 +1,6 @@
 "use client";
-import Sidebar from "@/app/components/sidebar/sidebar";
-import Topbar from "@/app/components/topbar/topbar";
+import Sidebar from "@/components/sidebar/sidebar";
+import Topbar from "@/components/topbar/topbar";
 import { useEffect, useState } from "react";
 
 const Layout = ({ children }: any) => {
