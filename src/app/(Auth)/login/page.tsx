@@ -1,175 +1,312 @@
-"use client"
-import React, { useState } from 'react';
-import Head from 'next/head';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+"use client";
 
-const Login: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const router = useRouter();
+import { useState } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Card } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import {
+  LogIn,
+  User,
+  Mail,
+  Lock,
+  Eye,
+  EyeOff,
+  Facebook,
+  Linkedin,
+  Github,
+  ArrowRight,
+  Building,
+  MoveRight,
+  CheckCircle2,
+  GraduationCap,
+  Briefcase,
+  Search,
+} from "lucide-react";
 
-  const handleSubmit = async (e: React.FormEvent) => {
+export default function LoginPage() {
+  const [activeTab, setActiveTab] = useState<"user" | "admin" | "employer">(
+    "user"
+  );
+  const [showPassword, setShowPassword] = useState(false);
+
+  const [userForm, setUserForm] = useState({
+    email: "",
+    password: "",
+    rememberMe: false,
+  });
+
+  const [adminForm, setAdminForm] = useState({
+    email: "",
+    password: "",
+    rememberMe: false,
+  });
+
+  const [employerForm, setEmployerForm] = useState({
+    email: "",
+    password: "",
+    rememberMe: false,
+  });
+
+  const handleUserChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target;
+    setUserForm((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleAdminChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target;
+    setAdminForm((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleEmployerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target;
+    setEmployerForm((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleUserSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setError('');
-    
-    try {
-      // Simulate API call - replace with actual authentication
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Mock validation
-      if (!email.includes('@') || password.length < 6) {
-        throw new Error('Invalid credentials. Please try again.');
-      }
-      
-      // Redirect on success
-      router.push('/dashboard');
-    } catch (err: any) {
-      setError(err.message || 'Login failed. Please try again.');
-    } finally {
-      setLoading(false);
-    }
+    console.log("User login:", userForm);
+  };
+
+  const handleAdminSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Admin login:", adminForm);
+  };
+
+  const handleEmployerSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Employer login:", employerForm);
+  };
+
+  const handleSocialLogin = (provider: string) => {
+    console.log(`Social login with ${provider}`);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex flex-col justify-center items-center px-4">
-      <Head>
-        <title>Login | Job Portal</title>
-        <meta name="description" content="Login to access your Saylani Student Portal" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-lg">
-        <div className="text-center">
-          <div className="flex justify-center">
-            <div className="relative h-20 w-40">
-              <Image
-                src="/saylani_logo.png"
-                alt="Saylani Welfare Trust"
-                layout="fill"
-                objectFit="contain"
-                priority
-              />
-            </div>
-          </div>
-          <h2 className="mt-2 text-2xl font-bold text-gray-900">Job Portal</h2>
-          <p className="mt-2 text-sm text-gray-600">
-            Sign in to access your saylani job portal account
-          </p>
+    <div className="flex min-h-screen">
+      {/* Left side - Branding */}
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-green-600 to-green-800 flex-col items-center justify-center p-12 text-white relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute top-0 left-0 w-full h-full">
+          <div className="absolute top-10 left-10 w-64 h-64 bg-green-500 rounded-full opacity-20 blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-80 h-80 bg-green-400 rounded-full opacity-20 blur-3xl"></div>
+          <div className="absolute top-1/3 right-1/4 w-40 h-40 bg-white rounded-full opacity-10 blur-xl"></div>
         </div>
 
-        {error && (
-          <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-4">
-            <div className="flex">
-              <div className="flex-shrink-0">
-                <svg className="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <div className="ml-3">
-                <p className="text-sm text-red-700">{error}</p>
-              </div>
-            </div>
-          </div>
-        )}
-
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label htmlFor="email-address" className="sr-only">Email address</label>
-              <input
-                id="email-address"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="appearance-none mb-2 rounded-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
-                placeholder="Email address"
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="sr-only">Password</label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="appearance-none rounded-none relative block w-full mt-4 px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
-                placeholder="Password"
+        <div className="relative z-10 max-w-md text-center">
+          <div className="flex justify-center mb-8">
+            <div className="h-24 w-24 rounded-full bg-white flex items-center justify-center shadow-lg mb-2">
+              <img
+                src="/unnamed.png"
+                alt="Saylani Welfare Logo"
+                className="h-22 w-22 rounded-full"
               />
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded"
-              />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                Remember me
-              </label>
-            </div>
-
-            <div className="text-sm">
-              <a href="#" className="font-medium text-emerald-600 hover:text-emerald-500">
-                Forgot your password?
-              </a>
-            </div>
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              disabled={loading}
-              className={`group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white ${
-                loading ? 'bg-emerald-400' : 'bg-emerald-600 hover:bg-emerald-700'
-              } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors`}
-            >
-              {loading ? (
-                <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                  <svg className="animate-spin h-5 w-5 text-emerald-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                </span>
-              ) : (
-                <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                  <svg className="h-5 w-5 text-emerald-400 group-hover:text-emerald-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-                  </svg>
-                </span>
-              )}
-              {loading ? 'Signing in...' : 'Sign in'}
-            </button>
-          </div>
-        </form>
-
-        <div className="text-center mt-4">
-          <p className="text-sm text-gray-600">
-            Don&apos;t have an account?
-            <a href="#" className="font-medium text-emerald-600 hover:text-emerald-500 ml-1">
-              Contact administration
-            </a>
+          <h1 className="text-5xl font-bold mb-4 tracking-tight">
+            Saylani Job Portal
+          </h1>
+          <p className="text-xl mb-10 text-green-100">
+            Empowering careers, connecting opportunities
           </p>
+
+          <div className="grid grid-cols-1 gap-6 mb-10">
+            <div className="bg-white/10 p-6 rounded-xl backdrop-blur-sm border border-white/20 transform transition-all hover:scale-105 hover:bg-white/15">
+              <div className="flex items-start mb-3">
+                <div className="p-2 bg-green-500/30 rounded-lg mr-3">
+                  <Search className="h-6 w-6 text-white" />
+                </div>
+                <div className="text-left">
+                  <h3 className="font-semibold text-lg mb-1">
+                    Find Opportunities
+                  </h3>
+                  <p className="text-green-100">
+                    Discover thousands of job openings across Pakistan
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white/10 p-6 rounded-xl backdrop-blur-sm border border-white/20 transform transition-all hover:scale-105 hover:bg-white/15">
+              <div className="flex items-start mb-3">
+                <div className="p-2 bg-green-500/30 rounded-lg mr-3">
+                  <Briefcase className="h-6 w-6 text-white" />
+                </div>
+                <div className="text-left">
+                  <h3 className="font-semibold text-lg mb-1">Career Growth</h3>
+                  <p className="text-green-100">
+                    Get guidance from industry professionals
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      
-      <div className="mt-6 text-center text-sm text-gray-500">
-        <p>© {new Date().getFullYear()} Saylani Welfare Trust. All rights reserved.</p>
+
+      {/* Right side - Login Forms */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50 relative bottom-18">
+        <Card className="w-full max-w-md p-8 shadow-xl border-0 bg-white">
+          <div className="lg:hidden flex justify-center mb-8">
+            <div className="h-16 w-16 rounded-full bg-green-600 flex items-center justify-center shadow-lg">
+              <img
+                src="/api/placeholder/50/50"
+                alt="Saylani Welfare Logo"
+                className="h-12 w-12 rounded-full"
+              />
+            </div>
+          </div>
+
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
+              Welcome Back
+            </h1>
+            <p className="text-gray-500 mt-2">
+              Sign in to your account to continue
+            </p>
+          </div>
+          <form onSubmit={handleUserSubmit}>
+            <div className="space-y-5">
+              <div className="space-y-2">
+                <Label
+                  htmlFor="user-email"
+                  className="text-gray-700 font-medium"
+                >
+                  Email Address
+                </Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Input
+                    id="user-email"
+                    name="email"
+                    type="email"
+                    placeholder="youremail@example.com"
+                    className="pl-10 bg-gray-50 border-gray-200 py-5 focus:border-green-500 focus:ring-green-500 rounded-lg"
+                    value={userForm.email}
+                    onChange={handleUserChange}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <Label
+                    htmlFor="user-password"
+                    className="text-gray-700 font-medium"
+                  >
+                    Password
+                  </Label>
+                  <Link
+                    href="/forgot-password"
+                    className="text-sm text-green-600 hover:text-green-800 hover:underline font-medium"
+                  >
+                    Forgot password?
+                  </Link>
+                </div>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Input
+                    id="user-password"
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="••••••••"
+                    className="pl-10 pr-10 py-5 bg-gray-50 border-gray-200 focus:border-green-500 focus:ring-green-500 rounded-lg"
+                    value={userForm.password}
+                    onChange={handleUserChange}
+                    required
+                  />
+                  <button
+                    type="button"
+                    className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
+              </div>
+              <Button
+                type="submit"
+                className="w-full bg-green-600 hover:bg-green-700 text-white py-6 rounded-lg flex items-center justify-center transition-all font-medium text-base"
+              >
+                Sign In
+                <MoveRight size={18} className="ml-2" />
+              </Button>
+
+              <div className="relative my-6">
+                <div className="absolute inset-0 flex items-center">
+                  <Separator className="w-full" />
+                </div>
+                <div className="relative flex justify-center">
+                  <span className="bg-white px-4 text-sm text-gray-500">
+                    OR CONTINUE WITH
+                  </span>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 gap-3">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="flex items-center justify-center border-gray-200 hover:bg-gray-50 py-5 rounded-lg"
+                  onClick={() => handleSocialLogin("Google")}
+                >
+                  {" "}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 48 48"
+                  >
+                    <path
+                      fill="#FFC107"
+                      d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"
+                    />
+                    <path
+                      fill="#FF3D00"
+                      d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"
+                    />
+                    <path
+                      fill="#4CAF50"
+                      d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"
+                    />
+                    <path
+                      fill="#1976D2"
+                      d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
+                    />
+                  </svg>
+                  Login With Google
+                </Button>
+              </div>
+
+              <div className="text-center mt-8">
+                <p className="text-gray-600 text-sm">
+                  Don't have an account?{" "}
+                  <Link
+                    href="/signup"
+                    className="text-green-600 hover:text-green-800 hover:underline font-semibold"
+                  >
+                    Create an account
+                  </Link>
+                </p>
+              </div>
+            </div>
+          </form>
+        </Card>
       </div>
     </div>
   );
-};
-
-export default Login;
+}

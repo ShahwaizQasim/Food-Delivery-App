@@ -1,238 +1,275 @@
-'use client'
-import React, { useState } from "react";
-import { NextPage } from "next";
-import Head from "next/head";
-import Link from "next/link";
+"use client";
 
-const Signup: NextPage = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [agreeTerms, setAgreeTerms] = useState(false);
+import { useState } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  User,
+  Mail,
+  Lock,
+  Eye,
+  EyeOff,
+  Phone,
+  UserPlus,
+  Briefcase,
+  Building,
+  CheckCircle,
+} from "lucide-react";
+// import { toast } from 'sonner';
+
+export default function SignupPage() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+    agreeTerms: false,
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Add your registration logic here
-    console.log({ name, email, phone, password, confirmPassword, agreeTerms });
+
+    if (formData.password !== formData.confirmPassword) {
+      // toast.error('Passwords do not match!');
+      return;
+    }
+
+    if (!formData.agreeTerms) {
+      // toast.error('Please agree to the terms and conditions');
+      return;
+    }
+
+    console.log("Signup data:", formData);
+    // toast.success('Account created successfully! Please check your email for verification.');
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <Head>
-        <title>Sign Up | FoodExpress</title>
-        <meta name="description" content="Create your FoodExpress account" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div className="flex min-h-screen bg-gradient-to-br from-green-50 to-emerald-50">
+      {/* Left side banner */}
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-green-600 to-emerald-700 flex-col justify-between items-center text-white pt-[105px]">
+        <div className="w-full max-w-md">
+          <div className="mb-8 pt-10">
+            <h1 className="text-4xl font-bold mb-6">Saylani Job Portal</h1>
+            <p className="text-lg opacity-90 mb-10">
+              Your gateway to career opportunities that match your skills and
+              aspirations
+            </p>
+            <div className="space-y-6 mt-12">
+              <div className="flex items-start space-x-4">
+                <div className="bg-white/20 p-2 rounded-full">
+                  <Briefcase className="h-5 w-5" />
+                </div>
+                <div>
+                  <h3 className="font-medium text-lg">Thousands of Jobs</h3>
+                  <p className="text-sm opacity-90">
+                    Access a wide range of job opportunities across multiple
+                    industries
+                  </p>
+                </div>
+              </div>
 
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="flex justify-center">
-          <div className="text-center">
-            <div className="text-5xl mb-2">🍔</div>
-            <h2 className="text-center text-3xl font-extrabold text-gray-900">
-              FoodExpress
-            </h2>
+              <div className="flex items-start space-x-4">
+                <div className="bg-white/20 p-2 rounded-full">
+                  <Building className="h-5 w-5" />
+                </div>
+                <div>
+                  <h3 className="font-medium text-lg">Top Employers</h3>
+                  <p className="text-sm opacity-90">
+                    Connect with leading companies looking for talented
+                    professionals
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4">
+                <div className="bg-white/20 p-2 rounded-full">
+                  <CheckCircle className="h-5 w-5" />
+                </div>
+                <div>
+                  <h3 className="font-medium text-lg">Personalized Matches</h3>
+                  <p className="text-sm opacity-90">
+                    Get job recommendations that align with your skills and
+                    preferences
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <h2 className="mb-6 text-center text-2xl font-bold text-gray-900">
-            Create Your Account
-          </h2>
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Full Name
-              </label>
-              <div className="mt-1">
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  autoComplete="name"
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                  placeholder="Enter your full name"
-                />
+      {/* Right side form */}
+      <div className="flex-1 flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-10 relative bottom-8">
+        {/* <Card className="w-full p-8 relative bottom-11"> */}
+          <div className="text-center mb-8">
+            <div className="flex justify-center mb-5">
+              <div className="h-16 w-16 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
+                <UserPlus className="h-8 w-8 pl-1 text-white" />
+              </div>
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900">
+              Join Saylani Job Portal
+            </h1>
+            <p className="text-gray-600 mt-2">
+              Create an account to start your career journey
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label
+                  htmlFor="firstName"
+                  className="text-sm font-medium text-gray-700"
+                >
+                  First Name
+                </Label>
+                <div className="relative">
+                  <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Input
+                    id="firstName"
+                    name="firstName"
+                    placeholder="John"
+                    className="pl-10 h-12 rounded-lg border-gray-200 focus:border-green-500 focus:ring-green-500"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label
+                  htmlFor="lastName"
+                  className="text-sm font-medium text-gray-700"
+                >
+                  Last Name
+                </Label>
+                <div className="relative">
+                  <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Input
+                    id="lastName"
+                    name="lastName"
+                    placeholder="Doe"
+                    className="pl-10 h-12 rounded-lg border-gray-200 focus:border-green-500 focus:ring-green-500"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
               </div>
             </div>
 
-            <div>
-              <label
+            <div className="space-y-2">
+              <Label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
+                className="text-sm font-medium text-gray-700"
               >
                 Email Address
-              </label>
-              <div className="mt-1">
-                <input
+              </Label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                <Input
                   id="email"
                   name="email"
                   type="email"
-                  autoComplete="email"
+                  placeholder="you@example.com"
+                  className="pl-10 h-12 rounded-lg border-gray-200 focus:border-green-500 focus:ring-green-500"
+                  value={formData.email}
+                  onChange={handleChange}
                   required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                  placeholder="Enter your email address"
                 />
               </div>
             </div>
 
-            <div>
-              <label
+            <div className="space-y-2">
+              <Label
                 htmlFor="phone"
-                className="block text-sm font-medium text-gray-700"
+                className="text-sm font-medium text-gray-700"
               >
                 Phone Number
-              </label>
-              <div className="mt-1">
-                <input
+              </Label>
+              <div className="relative">
+                <Phone className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                <Input
                   id="phone"
                   name="phone"
                   type="tel"
-                  autoComplete="tel"
+                  placeholder="+923001234567"
+                  className="pl-10 h-12 rounded-lg border-gray-200 focus:border-green-500 focus:ring-green-500"
+                  value={formData.phone}
+                  onChange={handleChange}
                   required
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                  placeholder="Enter your phone number"
                 />
               </div>
             </div>
 
-            <div>
-              <label
+            <div className="space-y-2">
+              <Label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
+                className="text-sm font-medium text-gray-700"
               >
                 Password
-              </label>
-              <div className="mt-1">
-                <input
+              </Label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                <Input
                   id="password"
                   name="password"
-                  type="password"
-                  autoComplete="new-password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="••••••••"
+                  className="pl-10 pr-10 h-12 rounded-lg border-gray-200 focus:border-green-500 focus:ring-green-500"
+                  value={formData.password}
+                  onChange={handleChange}
                   required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                  placeholder="Create a password"
+                  minLength={8}
                 />
-              </div>
-            </div>
-            <div className="flex items-center">
-              <input
-                id="agree-terms"
-                name="agree-terms"
-                type="checkbox"
-                required
-                checked={agreeTerms}
-                onChange={(e) => setAgreeTerms(e.target.checked)}
-                className="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
-              />
-              <label
-                htmlFor="agree-terms"
-                className="ml-2 block text-sm text-gray-700"
-              >
-                I agree to the{" "}
-                <Link
-                  href="/terms"
-                  className="font-medium text-orange-600 hover:text-orange-500"
-                >
-                  Terms of Service
-                </Link>{" "}
-                and{" "}
-                <Link
-                  href="/privacy"
-                  className="font-medium text-orange-600 hover:text-orange-500"
-                >
-                  Privacy Policy
-                </Link>
-              </label>
-            </div>
-
-            <div>
-              <button
-                type="submit"
-                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition duration-150"
-              >
-                Create Account
-              </button>
-            </div>
-          </form>
-
-          <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">
-                  Or sign up with
-                </span>
-              </div>
-            </div>
-
-            <div className="mt-6 grid grid-cols-1">
-              <div>
                 <button
                   type="button"
-                  className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition duration-150"
+                  className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
+                  onClick={() => setShowPassword(!showPassword)}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 48 48"
-                  >
-                    <path
-                      fill="#FFC107"
-                      d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"
-                    />
-                    <path
-                      fill="#FF3D00"
-                      d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"
-                    />
-                    <path
-                      fill="#4CAF50"
-                      d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"
-                    />
-                    <path
-                      fill="#1976D2"
-                      d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
-                    />
-                  </svg>
-                  Login With Google
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               </div>
+              <p className="text-xs text-gray-500 mt-1">
+                Must be at least 8 characters
+              </p>
             </div>
-          </div>
+            <Button
+              type="submit"
+              className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white h-12 font-medium mt-6 rounded-lg shadow-md"
+            >
+              Create Account
+            </Button>
 
-          <div className="mt-6 text-center text-sm">
-            <p className="text-gray-600">
-              Already have an account?{" "}
-              <Link
-                href="/login"
-                className="font-medium text-orange-600 hover:text-orange-500"
-              >
-                Login
-              </Link>
-            </p>
-          </div>
-        </div>
+            <div className="text-center mt-6">
+              <p className="text-gray-600 text-sm">
+                Already have an account?{" "}
+                <Link
+                  href="/login"
+                  className="text-green-600 hover:underline font-medium"
+                >
+                  Sign in
+                </Link>
+              </p>
+            </div>
+          </form>
+        {/* </Card> */}
       </div>
     </div>
   );
-};
-
-export default Signup;
+}
