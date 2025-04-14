@@ -1,8 +1,8 @@
-import { dbConnect } from "@/lib/dbConnect";
+import { ConnectDB } from "@/lib/dbConnect";
 import { UserModel } from "@/models/user.model";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import NextAuth, { NextAuthOptions } from "next-auth";
-// import jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -27,7 +27,7 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Email and Password are required");
         }
-        await dbConnect();
+        await ConnectDB();
         try {
           const user = await UserModel.findOne({ email: credentials?.email });
           if (!user) {

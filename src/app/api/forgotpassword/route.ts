@@ -1,11 +1,11 @@
 import { sendEmail } from "@/helpers/mailer";
-import { dbConnect } from "@/lib/dbConnect";
+import { ConnectDB } from "@/lib/dbConnect";
 import { UserModel } from "@/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    await dbConnect();
+    await ConnectDB();
     const { email } = await request.json();
     const user = await UserModel.findOne({ email });
     console.log(user);
