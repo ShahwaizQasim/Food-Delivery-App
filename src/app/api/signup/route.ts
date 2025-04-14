@@ -2,6 +2,7 @@ import { ConnectDB } from "@/lib/dbConnect";
 import { UserModel } from "@/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
+import { sendEmail } from "@/helpers/mailer";
 
 export async function POST(request: NextRequest) {
   let { userName, email, password } = await request.json();
@@ -30,7 +31,8 @@ export async function POST(request: NextRequest) {
       password: hashedPassword,
     });
     const savedUser = await user.save();
-   return NextResponse.json(
+    await sendEmail({email, emailType: "VERIFY", userId: savedUser._id});
+    return NextResponse.json(
       { error: false, message: "SignUp Successfully", user: savedUser },
       { status: 200 }
     );

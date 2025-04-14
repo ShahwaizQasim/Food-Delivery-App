@@ -15,7 +15,10 @@ const UserSchema = new Schema(
       required: true,
       type: String,
     },
-    isAdmin: { type: Boolean, default: false },
+    role: {
+      type: String,
+      default: "user",
+    },
     profileBio: {
       type: String,
       default: "Hey There you are using SMIT AUTOGRADE",
@@ -25,8 +28,7 @@ const UserSchema = new Schema(
       default:
         "https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2220431045.jpg",
     },
-    createdAt: { type: Date, default: Date.now },
-    isVerify: {
+    isVerified: {
       type: Boolean,
       default: false,
     },
@@ -40,4 +42,5 @@ const UserSchema = new Schema(
   }
 );
 
-export const UserModel = mongoose.models.user || mongoose.model("user", UserSchema)
+export const UserModel =
+  mongoose.models.user || mongoose.model("user", UserSchema);
