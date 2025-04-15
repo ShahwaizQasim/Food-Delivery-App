@@ -4,92 +4,49 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Card } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import {
-  LogIn,
-  User,
   Mail,
   Lock,
   Eye,
   EyeOff,
-  Facebook,
-  Linkedin,
-  Github,
-  ArrowRight,
-  Building,
   MoveRight,
-  CheckCircle2,
-  GraduationCap,
   Briefcase,
   Search,
 } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from "zod";
+
+const LoginSchema = z.object({
+  email: z.string().email({ message: "Invalid email address" }),
+  password: z
+    .string()
+    .min(6, { message: "Password must be at least 6 characters" }),
+});
 
 export default function LoginPage() {
-  const [activeTab, setActiveTab] = useState<"user" | "admin" | "employer">(
-    "user"
-  );
   const [showPassword, setShowPassword] = useState(false);
 
-  const [userForm, setUserForm] = useState({
-    email: "",
-    password: "",
-    rememberMe: false,
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm({
+    resolver: zodResolver(LoginSchema)
   });
 
-  const [adminForm, setAdminForm] = useState({
-    email: "",
-    password: "",
-    rememberMe: false,
-  });
-
-  const [employerForm, setEmployerForm] = useState({
-    email: "",
-    password: "",
-    rememberMe: false,
-  });
-
-  const handleUserChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
-    setUserForm((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  const handleAdminChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
-    setAdminForm((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  const handleEmployerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
-    setEmployerForm((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  const handleUserSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("User login:", userForm);
-  };
-
-  const handleAdminSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Admin login:", adminForm);
-  };
-
-  const handleEmployerSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Employer login:", employerForm);
-  };
+  const onSubmit = (data: any) => {
+    try {
+      
+    } catch (error) {
+      console.log((error as Error).message);
+      
+    }
+  }
 
   const handleSocialLogin = (provider: string) => {
     console.log(`Social login with ${provider}`);
@@ -163,7 +120,7 @@ export default function LoginPage() {
           <div className="lg:hidden flex justify-center mb-8">
             <div className="h-16 w-16 rounded-full bg-green-600 flex items-center justify-center shadow-lg">
               <img
-                src="/api/placeholder/50/50"
+                src="/unnamed.png"
                 alt="Saylani Welfare Logo"
                 className="h-12 w-12 rounded-full"
               />
@@ -178,7 +135,7 @@ export default function LoginPage() {
               Sign in to your account to continue
             </p>
           </div>
-          <form onSubmit={handleUserSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="space-y-5">
               <div className="space-y-2">
                 <Label
@@ -190,15 +147,16 @@ export default function LoginPage() {
                 <div className="relative">
                   <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                   <Input
-                    id="user-email"
-                    name="email"
                     type="email"
                     placeholder="youremail@example.com"
                     className="pl-10 bg-gray-50 border-gray-200 py-5 focus:border-green-500 focus:ring-green-500 rounded-lg"
-                    value={userForm.email}
-                    onChange={handleUserChange}
-                    required
+                    {...register("email", { required: true })}
                   />
+                  {errors.email && (
+                    <p role="alert" className="text-red-600 pt-1">
+                      {errors?.email?.message}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -220,15 +178,16 @@ export default function LoginPage() {
                 <div className="relative">
                   <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                   <Input
-                    id="user-password"
-                    name="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="••••••••"
                     className="pl-10 pr-10 py-5 bg-gray-50 border-gray-200 focus:border-green-500 focus:ring-green-500 rounded-lg"
-                    value={userForm.password}
-                    onChange={handleUserChange}
-                    required
+                    {...register("password", { required: true })}
                   />
+                  {errors.password && (
+                    <p role="alert" className="text-red-600 pt-1">
+                      {errors.password.message}
+                    </p>
+                  )}
                   <button
                     type="button"
                     className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
