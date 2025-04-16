@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,9 +17,9 @@ import {
   Search,
 } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from '@hookform/resolvers/zod';
+import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { Success } from "@/components/sweetAlert2/alert";
 import { useRouter } from "next/navigation";
 
@@ -32,6 +32,7 @@ const LoginSchema = z.object({
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const { data: session, status } = useSession();
   const router = useRouter();
 
   const {
@@ -40,37 +41,44 @@ export default function LoginPage() {
     handleSubmit,
     reset,
   } = useForm({
-    resolver: zodResolver(LoginSchema)
+    resolver: zodResolver(LoginSchema),
   });
 
-  const onSubmit = async(data: any) => {
+  const onSubmit = async (data: any) => {
     try {
       console.log(data);
       const res = await signIn("credentials", {
         email: data?.email,
         password: data?.password,
-        redirect: false
+        redirect: false,
       });
       console.log("login res", res);
       if (res?.error) {
         if (res?.error == "Incorrect Password") {
-          Success("Incorrect email or password. Please try again.", "error")
-        }else if(res.error == "User Not Found"){
-          Success("No account found with this email. Please check your email or sign up.","error" )
-        }else{
-          Success("Login failed. Please try again later.", "error")
+          Success("Incorrect email or password. Please try again.", "error");
+        } else if (res.error == "User Not Found") {
+          Success(
+            "No account found with this email. Please check your email or sign up.",
+            "error"
+          );
+        } else {
+          Success("Login failed. Please try again later.", "error");
         }
-      }else{
+      } else {
         reset();
         Success("Login Successfully", "success");
-        router.push('/')
+        router.push("/");
       }
     } catch (error) {
       Success((error as Error).message, "error");
       console.log("login Error", error);
-      
     }
-  }
+  };
+  useEffect(() => {
+    if (status === "authenticated" && session) {
+      router.push("/");
+    }
+  }, [status, session, router]);
 
   const handleSocialLogin = async (provider: string) => {
     try {
@@ -79,10 +87,9 @@ export default function LoginPage() {
         redirect: false,
         callbackUrl: "/",
       });
-      console.log("result",  result);
+      console.log("result", result);
     } catch (error) {
       console.log("login Error", error);
-      
     }
   };
 

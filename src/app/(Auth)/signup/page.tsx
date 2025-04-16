@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,6 +23,7 @@ import { z } from "zod";
 import axios from "axios";
 import { Success } from "@/components/sweetAlert2/alert";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 // import { toast } from 'sonner';
 
 const SignUpSchema = z.object({
@@ -37,6 +38,8 @@ export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { data: session, status } = useSession();
+
   const {
     register,
     formState: { errors },
@@ -61,6 +64,13 @@ export default function SignupPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (status === "authenticated" && session) {
+      router.push("/");
+    }
+  }, [status, session, router]);
+
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-green-50 to-emerald-50">
       {/* Left side banner */}

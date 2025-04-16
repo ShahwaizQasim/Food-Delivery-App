@@ -8,7 +8,6 @@ export default async function Home() {
   await ConnectDB();
   return (
     <div className="">
-      <Navbar />
       <HeroSection />
       <Footer />
     </div>
