@@ -19,6 +19,9 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from "zod";
+import { signIn } from "next-auth/react";
+import { Success } from "@/components/sweetAlert2/alert";
+import { useRouter } from "next/navigation";
 
 const LoginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -29,6 +32,7 @@ const LoginSchema = z.object({
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   const {
     register,
@@ -39,17 +43,47 @@ export default function LoginPage() {
     resolver: zodResolver(LoginSchema)
   });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async(data: any) => {
     try {
-      
+      console.log(data);
+      const res = await signIn("credentials", {
+        email: data?.email,
+        password: data?.password,
+        redirect: false
+      });
+      console.log("login res", res);
+      if (res?.error) {
+        if (res?.error == "Incorrect Password") {
+          Success("Incorrect email or password. Please try again.", "error")
+        }else if(res.error == "User Not Found"){
+          Success("No account found with this email. Please check your email or sign up.","error" )
+        }else{
+          Success("Login failed. Please try again later.", "error")
+        }
+      }else{
+        reset();
+        Success("Login Successfully", "success");
+        router.push('/')
+      }
     } catch (error) {
-      console.log((error as Error).message);
+      Success((error as Error).message, "error");
+      console.log("login Error", error);
       
     }
   }
 
-  const handleSocialLogin = (provider: string) => {
-    console.log(`Social login with ${provider}`);
+  const handleSocialLogin = async (provider: string) => {
+    try {
+      console.log(`Social login with ${provider}`);
+      const result = await signIn(provider, {
+        redirect: false,
+        callbackUrl: "/",
+      });
+      console.log("result",  result);
+    } catch (error) {
+      console.log("login Error", error);
+      
+    }
   };
 
   return (
@@ -221,7 +255,7 @@ export default function LoginPage() {
                   type="button"
                   variant="outline"
                   className="flex items-center justify-center border-gray-200 hover:bg-gray-50 py-5 rounded-lg"
-                  onClick={() => handleSocialLogin("Google")}
+                  onClick={() => handleSocialLogin("google")}
                 >
                   {" "}
                   <svg

@@ -1,17 +1,18 @@
 import { ConnectDB } from "@/lib/dbConnect";
 import { UserModel } from "@/models/user.model";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import NextAuth, { NextAuthOptions } from "next-auth";
-import jwt from "jsonwebtoken";
-import { NextResponse } from "next/server";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 interface CustomUser {
   id: string;
-  userName: string;
+  name: string;
   email: string;
-  isVerified: boolean;
   isAdmin: boolean;
+  isVerified: boolean;
+  profileBio: String;
+  profilePic: String;
 }
 
 export const authOptions: NextAuthOptions = {
@@ -42,35 +43,76 @@ export const authOptions: NextAuthOptions = {
           }
           return {
             id: user._id.toString(),
-            userName: user.userName,
+            name: user.name,
             email: user.email,
-            isVerified: user.isVerified,
             isAdmin: user.isAdmin,
+            isVerified: user.isVerified,
+            profilePic: user.profilePic || "",
+            profileBio: user.profileBio || "",
           };
         } catch (error: any) {
           throw new Error(error);
         }
       },
     }),
+    GoogleProvider({
+      clientId: process.env.CLIENT_ID as string,
+      clientSecret: process.env.CLIENT_SECRET as string,
+    }),
   ],
   callbacks: {
-    async jwt({ token, user }: { token: JWT; user: CustomUser }) {
+    async signIn({
+      user,
+      account,
+      profile,
+    }: {
+      user: CustomUser;
+      account: any;
+      profile: any;
+    }) {
+      try {
+        await ConnectDB();
+        console.log("user", user);
+        let dbUser = await UserModel.findOne({ email: user.email });
+        if (!dbUser) {
+          dbUser = await UserModel.create({
+            name: user.name,
+            email: user.email,
+            profilePic: user.image,
+            isAdmin: user.isAdmin,
+            isVerified: true,
+            provider: "google",
+            googleId: account.providerAccoundId,
+          });
+          console.log("New Google user created:", user);
+        }
+        user.id = dbUser._id.toString();
+        user.isAdmin = dbUser.isAdmin;
+        return true;
+      } catch (error) {
+        console.log("error signin callback", error);
+        return false;
+      }
+    },
+    async jwt({ token, user }: { token: any; user: CustomUser }) {
       if (user) {
         token.id = user.id;
-        token.userName = user.userName;
+        token.name = user.name;
         token.email = user.email;
         token.isVerified = user.isVerified;
-        token.isAdmin = user.isAdmin;
+        token.profilePic = user.profilePic;
+        token.profileBio = user.profileBio;
       }
       return token;
     },
-    async session({ session, token }: { session: any; token: JWT }) {
+    async session({ session, token }: { session: any; token: any }) {
       if (session.user) {
         session.user.id = token.id;
-        session.user.userName = token.userName;
+        session.user.name = token.name;
         session.user.email = token.email;
-        session.user.isAdmin = token.isAdmin;
         session.user.isVerified = token.isVerified;
+        session.user.profilePic = token.profilePic;
+        session.user.profileBio = token.profileBio;
       }
       return session;
     },
@@ -78,7 +120,7 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
-  secret: process.env.NEXTAUTH_SECRET || "12345",
+  secret: process.env.NEXTAUTH_SECRET || "1234567",
 };
 
 const handler = NextAuth(authOptions);

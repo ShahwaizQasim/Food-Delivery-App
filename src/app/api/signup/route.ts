@@ -5,10 +5,10 @@ import bcrypt from "bcryptjs";
 import { sendEmail } from "@/helpers/mailer";
 
 export async function POST(request: NextRequest) {
-  let { fullName, email, password } = await request.json();
-  console.log("recieved Data", { fullName, email, password });
+  let { name, email, password } = await request.json();
+  console.log("recieved Data", { name, email, password });
 
-  if (!fullName || !email || !password) {
+  if (!name || !email || !password) {
     return NextResponse.json(
       { error: true, message: "Incomplete input data" },
       { status: 400 }
@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
     const hashedPassword = bcrypt.hashSync(password, 10);
 
     let user = await new UserModel({
-      fullName,
+      name,
       email,
       password: hashedPassword,
     });

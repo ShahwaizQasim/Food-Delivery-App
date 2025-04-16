@@ -4,9 +4,13 @@ import { useState } from "react";
 import { Menu, X, User, LogIn } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { useSession } from "next-auth/react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { status, data: session } = useSession();
+  console.log("status in Navbar", status);
+  console.log("Data in Navbar", session);
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
@@ -14,9 +18,14 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-          <div className="h-12 w-48">
-            <img src="/saylani_logo.png" alt="saylani_logo" height={"100%"} width={"100%"} />
-          </div>
+            <div className="h-12 w-48">
+              <img
+                src="/saylani_logo.png"
+                alt="saylani_logo"
+                height={"100%"}
+                width={"100%"}
+              />
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -50,13 +59,19 @@ const Navbar = () => {
           {/* Auth Buttons (Desktop) */}
           <div className="hidden md:flex items-center space-x-3">
             <Link href="/login">
-              <Button variant="outline" className="flex items-center gap-2 cursor-pointer hover:bg-green-500 hover:text-white">
+              <Button
+                variant="outline"
+                className="flex items-center gap-2 cursor-pointer hover:bg-green-500 hover:text-white"
+              >
                 <LogIn size={18} />
                 Login
               </Button>
             </Link>
             <Link href="/signup">
-              <Button variant={"outline"} className="bg-green-500 hover:bg-white hover:text-black flex items-center gap-2 cursor-pointer px-4 text-white">
+              <Button
+                variant={"outline"}
+                className="bg-green-500 hover:bg-white hover:text-black flex items-center gap-2 cursor-pointer px-4 text-white"
+              >
                 <User size={18} />
                 Sign Up
               </Button>
