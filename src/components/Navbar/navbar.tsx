@@ -103,7 +103,7 @@ const Navbar = () => {
                 pathname === "/service" && "border-b-2 border-green-500"
               }`}
             >
-              Service
+              Services
             </Link>
           </div>
 

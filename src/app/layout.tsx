@@ -6,6 +6,7 @@ import SessionProviderWrapper from "./sessionProvider";
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar/navbar";
 import Footer from "@/components/footer/footer";
+import ProtectedRoute from "./ProtectedRoute";
 
 // export const metadata: Metadata = {
 //   title: "Create Next App",

@@ -147,7 +147,7 @@ const JobCard = ({ id, title, location, type, category, postedDate, deadline, de
         </div>
         
         <Button 
-          className="w-full bg-green-600 hover:bg-green-400 text-white"
+          className="w-full bg-gradient-to-r from-green-600 to-green-400 text-white"
         >
           View Details
           <ArrowRight className="h-4 w-4 ml-2" />

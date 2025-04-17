@@ -22,6 +22,7 @@ import { z } from "zod";
 import { signIn, useSession } from "next-auth/react";
 import { Success } from "@/components/sweetAlert2/alert";
 import { useRouter } from "next/navigation";
+import Loader from "@/components/loader/loader";
 
 const LoginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -79,6 +80,10 @@ export default function LoginPage() {
       router.push("/");
     }
   }, [status, session, router]);
+
+  if (status === "loading" || (status === "authenticated" && session)) {
+    return <Loader />;
+  }
 
   const handleSocialLogin = async (provider: string) => {
     try {

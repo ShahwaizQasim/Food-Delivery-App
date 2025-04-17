@@ -24,6 +24,7 @@ import axios from "axios";
 import { Success } from "@/components/sweetAlert2/alert";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import Loader from "@/components/loader/loader";
 // import { toast } from 'sonner';
 
 const SignUpSchema = z.object({
@@ -64,12 +65,17 @@ export default function SignupPage() {
       setLoading(false);
     }
   };
-
+ 
+  
   useEffect(() => {
     if (status === "authenticated" && session) {
       router.push("/");
     }
   }, [status, session, router]);
+  
+  if (status === "loading" || (status === "authenticated" && session)) {
+    return <Loader />;
+  } 
 
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-green-50 to-emerald-50">
