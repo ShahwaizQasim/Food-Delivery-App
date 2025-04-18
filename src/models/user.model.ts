@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 const UserSchema = new Schema(
   {
-    namespaceame: {
+    name: {
       type: String,
       required: true,
     },

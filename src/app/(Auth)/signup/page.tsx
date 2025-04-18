@@ -28,7 +28,7 @@ import Loader from "@/components/loader/loader";
 // import { toast } from 'sonner';
 
 const SignUpSchema = z.object({
-  fullName: z.string().min(3, "Username must be at least 3 characters"),
+  name: z.string().min(3, "Username must be at least 3 characters"),
   email: z.string().email({ message: "Invalid email address" }),
   password: z
     .string()
@@ -54,7 +54,7 @@ export default function SignupPage() {
     try {
       setLoading(true);
       const res = await axios.post("/api/signup", data);
-      Success("SignUp Successfully", "success");
+      Success("Please check your email to verify your account", "success");
       console.log("res", res);
       router.push("/login");
       console.log(data);
@@ -162,11 +162,11 @@ export default function SignupPage() {
               <Input
                 placeholder="Enter your FullName"
                 className="pl-10 h-12 rounded-lg border-gray-200 focus:border-green-500 focus:ring-green-500"
-                {...register("fullName", { required: true })}
+                {...register("name", { required: true })}
               />
-              {errors.fullName && (
+              {errors.name && (
                 <p role="alert" className="text-red-600 pt-1">
-                  {errors?.fullName?.message}
+                  {errors?.name?.message}
                 </p>
               )}
             </div>

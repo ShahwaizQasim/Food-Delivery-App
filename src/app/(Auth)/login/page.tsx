@@ -55,13 +55,18 @@ export default function LoginPage() {
       });
       console.log("login res", res);
       if (res?.error) {
-        if (res?.error == "Incorrect Password") {
-          Success("Incorrect email or password. Please try again.", "error");
-        } else if (res.error == "User Not Found") {
+        if (res?.error === "User Not Found") {
           Success(
             "No account found with this email. Please check your email or sign up.",
             "error"
           );
+        } else if (res?.error === "Email Not Verified") {
+          Success(
+            "Your email has not been verified. Please check your inbox for the verification link.",
+            "error"
+          );
+        } else if (res?.error === "Incorrect Password") {
+          Success("Incorrect email or password. Please try again.", "error");
         } else {
           Success("Login failed. Please try again later.", "error");
         }

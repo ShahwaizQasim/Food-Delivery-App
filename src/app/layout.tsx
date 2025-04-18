@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const pathname = usePathname();
-  const hideNavbarPaths = ["/login", "/signup", "/dashboard"];
+  const hideNavbarPaths = ["/login", "/signup", "/dashboard","/verifyemail"];
   const shouldhideNavbar = hideNavbarPaths.includes(pathname);
 
   return (

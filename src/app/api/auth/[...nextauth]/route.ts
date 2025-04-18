@@ -29,10 +29,12 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Email and Password are required");
         }
         await ConnectDB();
-        try {
           const user = await UserModel.findOne({ email: credentials?.email });
           if (!user) {
             throw new Error("User Not Found");
+          }
+          if (!user.isVerified) {
+            throw new Error("Email Not Verified")
           }
           const isPasswordMatch = await bcrypt.compare(
             credentials?.password,
@@ -50,9 +52,6 @@ export const authOptions: NextAuthOptions = {
             profilePic: user.profilePic || "",
             profileBio: user.profileBio || "",
           };
-        } catch (error: any) {
-          throw new Error(error);
-        }
       },
     }),
     GoogleProvider({

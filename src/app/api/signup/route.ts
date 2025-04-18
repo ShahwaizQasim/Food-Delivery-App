@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
       password: hashedPassword,
     });
     const savedUser = await user.save();
-    // await sendEmail({email, emailType: "VERIFY", userId: savedUser._id});
+    await sendEmail({email, emailType: "VERIFY", userId: savedUser._id});
     return NextResponse.json(
       { error: false, message: "SignUp Successfully", user: savedUser },
       { status: 200 }

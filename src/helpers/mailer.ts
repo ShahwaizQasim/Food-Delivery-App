@@ -29,7 +29,7 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
       },
     });
     const mailOption = {
-      from: `SHAHWAIZ APP <${process.env.GMAIL}>`, // sender address
+      from: `Saylani Job Bank <${process.env.GMAIL}>`, // sender address
       to: email, // list of receivers
       subject:
         emailType === "VERIFY" ? "Verify Your Email" : "Reset Your Password", // Subject line
@@ -49,7 +49,7 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
                         <a href="${process.env.DOMAIN}/${
         emailType === "VERIFY" ? "verifyemail" : "resetpassword"
       }?token=${token}" 
-                           style="background-color: #4CAF50; color: white; padding: 15px 25px; text-decoration: none; border-radius: 4px;">
+                           style="background-color: #4CAF50; color: white; padding: 15px 25px; text-decoration: none; border-radius: 4px; margin-block:15px">
                            ${
                              emailType === "VERIFY"
                                ? "Verify Email"
