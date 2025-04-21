@@ -33,6 +33,7 @@ const LoginSchema = z.object({
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -47,7 +48,7 @@ export default function LoginPage() {
 
   const onSubmit = async (data: any) => {
     try {
-      console.log(data);
+      setLoading(true);
       const res = await signIn("credentials", {
         email: data?.email,
         password: data?.password,
@@ -78,6 +79,8 @@ export default function LoginPage() {
     } catch (error) {
       Success((error as Error).message, "error");
       console.log("login Error", error);
+    } finally {
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -252,8 +255,14 @@ export default function LoginPage() {
                 type="submit"
                 className="w-full bg-green-600 hover:bg-green-700 text-white py-6 rounded-lg flex items-center justify-center transition-all font-medium text-base"
               >
-                Sign In
-                <MoveRight size={18} className="ml-2" />
+                {loading ? (
+                  "loading...."
+                ) : (
+                  <>
+                    <span>Sign In</span>
+                    <MoveRight size={18} className="ml-2" />
+                  </>
+                )}
               </Button>
 
               <div className="relative my-6">

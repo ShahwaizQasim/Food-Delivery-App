@@ -2,7 +2,7 @@ import { ConnectDB } from "@/lib/dbConnect";
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import { UserModel } from "@/models/user.model";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 export async function POST(req: NextRequest) {
   try {
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Hash the new password
-    const hashedPassword = await bcrypt.hash(password1, 10);
+    const hashedPassword = bcrypt.hashSync(password1, 10);
 
     await UserModel.findByIdAndUpdate(userId, { password: hashedPassword});
 
