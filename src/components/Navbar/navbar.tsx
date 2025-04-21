@@ -13,6 +13,9 @@ import {
   HomeIcon,
   LogOut,
   User2Icon,
+  JoystickIcon,
+  Joystick,
+  Briefcase,
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/button";
@@ -150,16 +153,16 @@ const Navbar = () => {
                         </Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem className="cursor-pointer">
-                        <Link href="/dashboard">
+                        <Link href="/jobs">
                           <div className="flex items-center space-x-2">
-                            <CircleGauge size={16} />
-                            <span>Dashboard</span>
+                            <Briefcase size={16} />
+                            <span>Jobs</span>
                           </div>
                         </Link>
 
                       </DropdownMenuItem>
                       <DropdownMenuItem className="cursor-pointer">
-                        <Link href="/dashboard">
+                        <Link href="/profile">
                           <div className="flex items-center space-x-2">
                             <User2Icon size={16} />
                             <span>Profile</span>
@@ -245,13 +248,7 @@ const Navbar = () => {
             >
               About
             </Link>
-            <Link
-              href="/contact"
-              className="flex items-center text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-md p-2 font-medium"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Contact
-            </Link>
+          
 
             <div className="flex flex-col space-y-2 pt-3 border-t border-gray-200 mt-3">
               {status === "authenticated" ? (

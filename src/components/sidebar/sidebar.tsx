@@ -33,36 +33,22 @@ const Sidebar = ({ expanded }: SidebarProps) => {
       path: "/dashboard",
     },
     {
-      name: "Results",
+      name: "Post New Job",
       icon: <ClipboardList size={20} />,
-      path: "/dashboard/results",
+      path: "/dashboard/postJob",
     },
     {
-      name: "Upload Answer Sheet",
-      icon: <CloudUpload size={20} />,
-      path: "/dashboard/upload-sheet",
+      name: "Applications Reviews",
+      icon: <ClipboardList size={20} />,
+      path: "/dashboard/applicationReviews",
     },
-    {
-      name: "Check Answer Sheet",
-      icon: <FileText size={20} />,
-      path: "/dashboard/check-sheets",
-    },
-    {
-      name: "Compare",
-      icon: <GitCompareArrows size={20} />,
-      path: "/dashboard/compare",
-    },
-    {
-      name: "Generate Paper",
-      icon: <Edit size={20} />,
-      path: "/dashboard/editPaper",
-    },
-    { name: "Profile", icon: <User size={20} />, path: "/dashboard/profile" },
+ 
+    { name: "Profile", icon: <User size={20} />, path: "/dashboard/adminProfile" },
   ];
 
   return (
     <aside
-      className={`h-screen transition-all z-50 duration-300 bg-white dark:bg-gray-800 border-r border-emerald-200 dark:border-emerald-700 ${
+      className={`h-screen transition-all z-50 duration-300 bg-white border-r border-emerald-200 ${
         expanded ? "w-64" : "w-20"
       }`}
     >
@@ -71,18 +57,19 @@ const Sidebar = ({ expanded }: SidebarProps) => {
           <Link href="/">
             {expanded ? (
               <Image
-                src="/smi-1.png"
+                src="/saylani_logo.png"
                 alt="Company Logo"
                 width={150}
                 height={60}
+                className="mb-6"
               />
             ) : (
               <Image
-                src="/smit-4.png"
+                src="/unnamed.png"
                 alt="Company Logo"
                 width={50}
                 height={50}
-                className="mx-auto"
+                className="mx-auto mb-6"
               />
             )}
           </Link>
@@ -96,20 +83,20 @@ const Sidebar = ({ expanded }: SidebarProps) => {
                 <li
                   className={`relative flex items-center overflow-hidden py-3 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group ${
                     isActive
-                      ? "bg-gradient-to-tr from-emerald-200 to-emerald-400 dark:from-emerald-600 dark:to-emerald-800 text-emerald-800 dark:text-gray-100"
-                      : "hover:bg-emerald-100 dark:hover:bg-emerald-700 text-emerald-800 dark:text-gray-200 hover:text-emerald-800 dark:hover:text-gray-100"
+                      ? "bg-gradient-to-tr from-emerald-200 to-emerald-400 text-emerald-800"
+                      : "hover:bg-emerald-100 text-emerald-800 hover:text-emerald-800"
                   } border-none outline-none`}
                 >
                   {isActive && (
-                    <div className="absolute left-0 w-1 h-8 bg-emerald-800 dark:bg-emerald-400 rounded-r-full" />
+                    <div className="absolute left-0 w-1 h-8 bg-emerald-800 rounded-r-full" />
                   )}
 
                   <div className="flex items-center bg-transparent gap-2">
                     <div
                       className={
                         isActive
-                          ? "text-emerald-800 dark:text-gray-100"
-                          : "dark:text-gray-200"
+                          ? "text-emerald-800"
+                          : ""
                       }
                     >
                       {item.icon}
