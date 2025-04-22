@@ -210,17 +210,17 @@ export default function ServicesPage() {
   return (
     <main className="bg-gray-50">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-green-700 to-green-500 text-white overflow-hidden">
+      <section className="relative bg-gradient-to-r from-green-600 to-green-400 text-white">
         <div className="absolute inset-0 bg-black opacity-30"></div>
-        <div className="container mx-auto px-10 py-16 md:py-22 relative z-10">
+        <div className="container mx-auto px-10 py-10 md:py-22 relative z-10">
           <div className="max-w-3xl">
-            <span className="inline-block bg-green-400 bg-opacity-30 px-4 py-1 rounded-full text-sm font-medium mb-4">
+            <span className="inline-block bg-green-400 bg-opacity-30 px-4 py-1 rounded-full text-[12px] font-medium mb-4">
               Comprehensive Services
             </span>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            <h1 className="text-4xl md:text-4xl font-bold mb-3">
               Our Services
             </h1>
-            <p className="text-base md:text-xl mb-8 opacity-90">
+            <p className="text-base md:text-base mb-8 opacity-90">
               Connecting talent with opportunity through our comprehensive job portal services
             </p>
           </div>

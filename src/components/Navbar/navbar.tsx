@@ -36,6 +36,8 @@ const Navbar = () => {
   const router = useRouter();
   const pathname = usePathname();
 
+  console.log(session);
+  
   // Add scroll effect
   useEffect(() => {
     const handleScroll = () => {
@@ -112,28 +114,16 @@ const Navbar = () => {
 
           {/* Search Button (Desktop) */}
           <div className="hidden md:flex items-center space-x-4">
-            {status === "authenticated" ? (
+            {status === "loading" ? 
+              <div className="h-10 w-[100px] bg-white animate-pulse"></div>
+            :status === "authenticated" ? (
               <div className="flex items-center space-x-4">
-                {/* <Button
-                  variant="ghost"
-                  className="text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-full p-2"
-                  aria-label="Notifications"
-                >
-                  <Bell/>
-                </Button>
-                <Button
-              variant="ghost"
-              className="text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-full p-2"
-              aria-label="Search"
-            >
-              <Search size={40} />
-            </Button> */}
                 <Link href="/profile">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <button className="flex items-center space-x-3 p-2 hover:bg-gray-100 rounded-lg transition-colors">
                       <div className="h-8 w-8 outline-none rounded-full bg-green-100 flex items-center justify-center text-green-600 font-medium border-2 border-green-500">
-                      {session?.user?.name?.charAt(0) || "U"}
+                      { session?.user?.name?.charAt(0) || "U"}
                     </div>
                         <ChevronDown
                           size={16}
@@ -218,15 +208,6 @@ const Navbar = () => {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4 space-y-3 animate-fadeIn">
-            <div className="flex items-center justify-between bg-gray-50 rounded-lg p-2 mb-2">
-              <input
-                type="text"
-                placeholder="Search jobs..."
-                className="bg-transparent border-none focus:outline-none w-full text-sm px-2"
-              />
-              <Search size={18} className="text-gray-500" />
-            </div>
-
             <Link
               href="/"
               className="flex items-center text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-md p-2 font-medium"

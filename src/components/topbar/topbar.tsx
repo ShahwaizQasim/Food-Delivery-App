@@ -26,6 +26,7 @@ interface TopbarProps {
 
 const Topbar = ({ toggleSidebar, expanded }: TopbarProps) => {
   const router = useRouter();
+  const {data: session} = useSession();
 
   const handleSignOut = async () => {
     await signOut({ redirect: false });
@@ -52,14 +53,14 @@ const Topbar = ({ toggleSidebar, expanded }: TopbarProps) => {
             <DropdownMenuTrigger asChild>
               <button className="flex items-center space-x-3 p-2 hover:bg-gray-100 rounded-lg transition-colors">
                 <div className="h-8 w-8 bg-emerald-400 rounded-full flex items-center justify-center text-white font-semibold">
-                  {"U"}
+                  {session?.user?.name?.charAt(0)||"U"}
                 </div>
                 <div className="hidden md:block text-left">
                   <p className="text-sm font-medium text-gray-700">
-                    {"User Name"}
+                    {session?.user?.name}
                   </p>
                   <p className="text-xs text-gray-500">
-                    {"user@example.com"}
+                    {session?.user?.email}
                   </p>
                 </div>
                 <ChevronDown
