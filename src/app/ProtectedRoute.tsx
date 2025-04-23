@@ -14,8 +14,15 @@ export default function ProtectedRoute({
   useEffect(() => {
     if (status === "unauthenticated") {
       router.replace("/");
+    }else if (status === "authenticated" && !session?.user?.isAdmin){
+      router.replace("/");
     }
   }, [status, router,session]);
+
+  useEffect(() => {
+    console.log("Session:", session);
+    console.log("Status:", status);
+  }, [session, status]);
 
   if (status == "loading") {
     return (
@@ -24,4 +31,10 @@ export default function ProtectedRoute({
       </div>
     );
   }
+  if (status === "authenticated" && session?.user?.isAdmin) {
+    return <>{children}</>;
+  }
+
+  return null
+
 }

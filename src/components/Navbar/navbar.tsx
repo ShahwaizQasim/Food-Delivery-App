@@ -6,15 +6,10 @@ import {
   X,
   User,
   LogIn,
-  Search,
-  Bell,
   ChevronDown,
-  CircleGauge,
   HomeIcon,
   LogOut,
   User2Icon,
-  JoystickIcon,
-  Joystick,
   Briefcase,
 } from "lucide-react";
 import Link from "next/link";
@@ -50,9 +45,9 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleSignOut = async() => {
-      await signOut()
-      router.push('/')
+  const handleSignOut = async () => {
+    await signOut();
+    router.push("/");
   };
 
   return (
@@ -75,54 +70,58 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link
-              href="/"
-              className={`text-gray-600 hover:text-green-600 font-medium transition-colors duration-200 text-sm lg:text-base ${
-                pathname === "/" && "border-b-2 border-green-500"
-              }`}
-            >
-              Home
-            </Link>
-            <Link
-              href="/jobs"
-              className={`text-gray-600 hover:text-green-600 font-medium transition-colors duration-200 text-sm lg:text-base ${
-                pathname === "/jobs" && "border-b-2 border-green-500"
-              }`}
-            >
-              Jobs
-            </Link>
-            <Link
-              href="/about"
-              className={`text-gray-600 hover:text-green-600 font-medium transition-colors duration-200 text-sm lg:text-base ${
-                pathname === "/about" && "border-b-2 border-green-500"
-              }`}
-            >
-              About
-            </Link>
-            <Link
-              href="/service"
-              className={`text-gray-600 hover:text-green-600 font-medium transition-colors duration-200 text-sm lg:text-base ${
-                pathname === "/service" && "border-b-2 border-green-500"
-              }`}
-            >
-              Services
-            </Link>
-          </div>
+          {status === "authenticated" ? (
+            <div className="hidden md:flex items-center space-x-8">
+              <Link
+                href="/"
+                className={`text-gray-600 hover:text-green-600 font-medium transition-colors duration-200 text-sm lg:text-base ${
+                  pathname === "/" && "border-b-2 border-green-500"
+                }`}
+              >
+                Home
+              </Link>
+              <Link
+                href="/jobs"
+                className={`text-gray-600 hover:text-green-600 font-medium transition-colors duration-200 text-sm lg:text-base ${
+                  pathname === "/jobs" && "border-b-2 border-green-500"
+                }`}
+              >
+                Jobs
+              </Link>
+              <Link
+                href="/about"
+                className={`text-gray-600 hover:text-green-600 font-medium transition-colors duration-200 text-sm lg:text-base ${
+                  pathname === "/about" && "border-b-2 border-green-500"
+                }`}
+              >
+                About
+              </Link>
+              <Link
+                href="/service"
+                className={`text-gray-600 hover:text-green-600 font-medium transition-colors duration-200 text-sm lg:text-base ${
+                  pathname === "/service" && "border-b-2 border-green-500"
+                }`}
+              >
+                Services
+              </Link>
+            </div>
+          ) : (
+            ""
+          )}
 
           {/* Search Button (Desktop) */}
           <div className="hidden md:flex items-center space-x-4">
-            {status === "loading" ? 
+            {status === "loading" ? (
               <div className="h-10 w-[100px] bg-white animate-pulse"></div>
-            :status === "authenticated" ? (
+            ) : status === "authenticated" ? (
               <div className="flex items-center space-x-4">
                 <Link href="/profile">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <button className="flex items-center space-x-3 p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                      <div className="h-8 w-8 outline-none rounded-full bg-green-100 flex items-center justify-center text-green-600 font-medium border-2 border-green-500">
-                      { session?.user?.name?.charAt(0) || "U"}
-                    </div>
+                        <div className="h-8 w-8 outline-none rounded-full bg-green-100 flex items-center justify-center text-green-600 font-medium border-2 border-green-500">
+                          {session?.user?.name?.charAt(0) || "U"}
+                        </div>
                         <ChevronDown
                           size={16}
                           className="text-gray-500 dark:text-gray-300"
@@ -147,7 +146,6 @@ const Navbar = () => {
                             <span>Jobs</span>
                           </div>
                         </Link>
-
                       </DropdownMenuItem>
                       <DropdownMenuItem className="cursor-pointer">
                         <Link href="/profile">
@@ -156,7 +154,6 @@ const Navbar = () => {
                             <span>Profile</span>
                           </div>
                         </Link>
-                        
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem
@@ -227,7 +224,6 @@ const Navbar = () => {
             >
               About
             </Link>
-          
 
             <div className="flex flex-col space-y-2 pt-3 border-t border-gray-200 mt-3">
               {status === "authenticated" ? (

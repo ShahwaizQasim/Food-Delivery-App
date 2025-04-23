@@ -75,14 +75,16 @@ const ProfilePage: NextPage = () => {
       if (file) {
         setImageFile(file);
         const reader = new FileReader();
-        console.log("reader", reader);
         
         reader.onloadend = () => {
           setImagePreview(reader.result as string);
         };
         reader.readAsDataURL(file);
+        console.log("reader", reader);
       }
     };
+
+    
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

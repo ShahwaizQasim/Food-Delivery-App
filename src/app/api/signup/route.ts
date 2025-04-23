@@ -5,9 +5,9 @@ import bcrypt from "bcryptjs";
 import { sendEmail } from "@/helpers/mailer";
 
 export async function POST(request: NextRequest) {
-  let { name, email, password } = await request.json();
-  console.log("recieved Data", { name, email, password });
 
+  let { name, email, password } = await request.json();
+  
   if (!name || !email || !password) {
     return NextResponse.json(
       { error: true, message: "Incomplete input data" },

@@ -84,8 +84,10 @@ export default function LoginPage() {
     }
   };
   useEffect(() => {
-    if (status === "authenticated" && session) {
+    if (status === "authenticated" && !session?.user?.isAdmin) {
       router.push("/");
+    }else if(status === "authenticated" && session?.user?.isAdmin){
+      router.push('/dashboard');
     }
   }, [status, session, router]);
 

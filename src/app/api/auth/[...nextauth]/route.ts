@@ -71,7 +71,6 @@ export const authOptions: NextAuthOptions = {
     }) {
       try {
         await ConnectDB();
-        console.log("user", user);
         let dbUser = await UserModel.findOne({ email: user.email });
         if (!dbUser) {
           dbUser = await UserModel.create({
@@ -98,6 +97,7 @@ export const authOptions: NextAuthOptions = {
         token.id = user.id;
         token.name = user.name;
         token.email = user.email;
+        token.isAdmin = user.isAdmin;
         token.isVerified = user.isVerified;
         token.profilePic = user.profilePic;
         token.profileBio = user.profileBio;
@@ -109,6 +109,7 @@ export const authOptions: NextAuthOptions = {
         session.user.id = token.id;
         session.user.name = token.name;
         session.user.email = token.email;
+        session.user.isAdmin = token.isAdmin;
         session.user.isVerified = token.isVerified;
         session.user.profilePic = token.profilePic;
         session.user.profileBio = token.profileBio;
