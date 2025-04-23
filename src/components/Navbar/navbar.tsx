@@ -36,8 +36,6 @@ const Navbar = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  console.log(session);
-  
   // Add scroll effect
   useEffect(() => {
     const handleScroll = () => {

@@ -68,74 +68,55 @@ const ProfilePage: NextPage = () => {
     }));
   };
 
-//   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     const file = e.target.files?.[0];
-//     if (file) {
-//       setImageFile(file);
-//       const reader = new FileReader();
-//       reader.onloadend = () => {
-//         setImagePreview(reader.result as string);
-//       };
-//       reader.readAsDataURL(file);
-//     }
-//   };
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      console.log("file", file);
+      
+      if (file) {
+        setImageFile(file);
+        const reader = new FileReader();
+        console.log("reader", reader);
+        
+        reader.onloadend = () => {
+          setImagePreview(reader.result as string);
+        };
+        reader.readAsDataURL(file);
+      }
+    };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      setIsLoading(true);
+      const formDataToSend = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        formDataToSend.append(key, value);
+      });
+      if (imageFile) {
+        formDataToSend.append("profilePic", imageFile);
+      }
+      console.log("formData", formData);
 
-const handleImageChange = () => {
+      const response = await axios.post("/api/updateprofile", formDataToSend);
 
-}
+      await update({
+        ...session,
+        user: {
+          ...session?.user,
+          ...formData,
+          profilePic:
+            response.data.user.profilePic || session?.user?.profilePic,
+        },
+      } as SessionData);
+      router.refresh();
+      setIsModalOpen(false);
+    } catch (error) {
+      console.log("Error Updating Profile", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-//   const handleSubmit = async (e: React.FormEvent) => {
-//     e.preventDefault();
-//     setIsLoading(true);
-
-//     try {
-//       const formDataToSend = new FormData();
-
-//       Object.entries(formData).forEach(([key, value]) => {
-//         formDataToSend.append(key, value);
-//       });
-
-//       if (imageFile) {
-//         formDataToSend.append("profilePic", imageFile);
-//       }
-
-//       const response = await axios.post(
-//         "/api/v1/update-profile",
-//         formDataToSend,
-//         {
-//           headers: {
-//             "Content-Type": "multipart/form-data",
-//           },
-//         }
-//       );
-
-//       if (response.status !== 200) {
-//         throw new Error(response.data.message || "Failed to update profile");
-//       }
-
-//       await update({
-//         ...session,
-//         user: {
-//           ...session?.user,
-//           ...formData,
-//           profilePic:
-//             response.data.user.profilePic || session?.user?.profilePic,
-//         },
-//       } as SessionData);
-
-//       router.refresh();
-//       setIsModalOpen(false);
-//     } catch (error) {
-//       console.error("Error updating profile:", error);
-//     } finally {
-//       setIsLoading(false);
-//     }
-//   };
-
-const handleSubmit = () => {
-    
-}
   return (
     <div className="w-full">
       <div className="w-full min-h-screen bg-white">
@@ -158,9 +139,7 @@ const handleSubmit = () => {
             <h2 className="text-4xl font-bold text-black">
               {session?.user?.name}
             </h2>
-            <p className="text-xl text-gray-600 mt-2">
-              {session?.user?.email}
-            </p>
+            <p className="text-xl text-gray-600 mt-2">{session?.user?.email}</p>
             <p className="mt-6 text-xl text-gray-800 max-w-2xl mx-auto">
               {formData.profileBio}
             </p>
@@ -220,7 +199,7 @@ const handleSubmit = () => {
                       className="h-full w-full object-cover"
                     />
                   ) : (
-                    formData.name?.charAt(0) || "U"
+                    session?.user?.name?.charAt(0) || "U"
                   )}
                 </div>
 
