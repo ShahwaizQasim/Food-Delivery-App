@@ -11,6 +11,7 @@ import {
   LogOut,
   User2Icon,
   Briefcase,
+  CircleGauge,
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/button";
@@ -155,6 +156,17 @@ const Navbar = () => {
                           </div>
                         </Link>
                       </DropdownMenuItem>
+                      {
+                        session?.user?.isAdmin ?
+                        <DropdownMenuItem className="cursor-pointer">
+                        <Link href="/dashboard">
+                          <div className="flex items-center space-x-2">
+                            <CircleGauge size={16} />
+                            <span>Dashboard</span>
+                          </div>
+                        </Link>
+                      </DropdownMenuItem>: ""
+                      }
                       <DropdownMenuSeparator />
                       <DropdownMenuItem
                         onClick={handleSignOut}
