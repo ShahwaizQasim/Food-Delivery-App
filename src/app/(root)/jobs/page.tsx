@@ -119,7 +119,7 @@ const JobCard = ({ id, title, location, type, category, postedDate, deadline, de
   };
   
   return (
-    <div className='mx-auto px-6'>
+    <div className='mx-auto'>
     <Card className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
       <div className="p-6">
         <div className="flex justify-between items-start mb-3">
@@ -147,7 +147,7 @@ const JobCard = ({ id, title, location, type, category, postedDate, deadline, de
         </div>
         
         <Button 
-          className="w-full bg-gradient-to-r from-green-600 to-green-400 text-white"
+          className="w-full bg-gradient-to-r from-blue-700 to-blue-400 text-white"
         >
           View Details
           <ArrowRight className="h-4 w-4 ml-2" />
@@ -174,7 +174,7 @@ const JobFilter = ({ onFilter }) => {
   };
   
   return (
-    <div className='container mx-auto px-6  mt-8'>
+    <div className='container mx-auto  mt-8'>
     <div className="bg-white rounded-xl shadow-md p-6 mb-8">
       <h2 className="text-xl font-semibold mb-4">Find Your Perfect Job</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -273,7 +273,7 @@ export default function JobsPage() {
     <div className="bg-gray-50 min-h-screen">
       {/* Page Header */}
       <div className="bg-gradient-to-r from-green-600 to-green-400 text-white py-16">
-        <div className="container mx-auto px-10">
+        <div className="container mx-auto px-2">
           <h1 className="text-4xl font-bold">Career Opportunities</h1>
           <p className="mt-4 text-lg opacity-90">Discover meaningful work and grow your career with Saylani Welfare Trust</p>
         </div>
