@@ -6,8 +6,6 @@ import {
   LayoutDashboard,
   ClipboardList,
   User,
-  ChevronDown,
-  ChevronRight,
 } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";

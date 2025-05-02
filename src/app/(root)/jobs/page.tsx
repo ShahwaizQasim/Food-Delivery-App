@@ -149,7 +149,7 @@ const JobCard = ({ id, title, location, type, category, postedDate, deadline, de
         <Button 
           className="w-full bg-gradient-to-r from-blue-700 to-blue-400 text-white"
         >
-          View Details
+          Apply Now
           <ArrowRight className="h-4 w-4 ml-2" />
         </Button>
       </div>
