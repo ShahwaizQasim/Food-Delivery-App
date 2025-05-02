@@ -8,12 +8,29 @@ interface JobPostInput {
   location: string;
   jobType: string;
   salary: string;
+  category: string;
   experienceLevel: string;
   qualification: string;
-  skillsRequired: string[];
-  responsibilites: string;
-  contactEmail: string,
+  skillsRequired: string;
+  responsibilities: string;
+  contactEmail: string;
   deadline: string; // or Date if already parsed
+}
+
+export async function GET() {
+  try {
+    await ConnectDB();
+    const jobPostDataGet = await JobPostModel.find();
+    return NextResponse.json(
+      { error: false, msg: "Job Post Successfully", jobsData: jobPostDataGet },
+      { status: 200 }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      { error: true, msg: (error as Error).message },
+      { status: 500 }
+    );
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -25,10 +42,11 @@ export async function POST(request: NextRequest) {
       location,
       jobType,
       salary,
+      category,
       experienceLevel,
       qualification,
       skillsRequired,
-      responsibilites,
+      responsibilities,
       contactEmail,
       deadline,
     } = (await request.json()) as JobPostInput;
@@ -38,10 +56,11 @@ export async function POST(request: NextRequest) {
       !description ||
       !jobType ||
       !salary ||
+      !category ||
       !experienceLevel ||
       !qualification ||
       !skillsRequired ||
-      !responsibilites ||
+      !responsibilities ||
       !contactEmail ||
       !deadline
     ) {
@@ -57,37 +76,21 @@ export async function POST(request: NextRequest) {
       location,
       jobType,
       salary,
+      category,
       experienceLevel,
       qualification,
       skillsRequired,
-      responsibilites,
+      responsibilities,
       contactEmail,
       deadline,
     });
 
     Job_Post_Data_Save = await Job_Post_Data_Save.save();
-
-    console.log(
-      "recieved data",
-      title,
-      description,
-      location,
-      jobType,
-      salary,
-      experienceLevel,
-      qualification,
-      skillsRequired,
-      contactEmail,
-      responsibilites,
-
-      deadline
-    );
     return NextResponse.json(
-      { error: false, msg: "Job Post Successfully" },
+      { error: false, msg: "Job Fetch Successfully" },
       { status: 200 }
     );
   } catch (error) {
-    console.log("Error", error);
     return NextResponse.json(
       { error: true, msg: (error as Error).message },
       { status: 500 }

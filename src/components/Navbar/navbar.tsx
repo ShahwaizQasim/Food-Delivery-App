@@ -75,32 +75,32 @@ const Navbar = () => {
             <div className="hidden md:flex items-center space-x-8">
               <Link
                 href="/"
-                className={`text-gray-600 hover:text-green-600 font-medium transition-colors duration-200 text-sm lg:text-base ${
-                  pathname === "/" && "border-b-2 border-green-500"
+                className={`text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200 text-sm lg:text-base ${
+                  pathname === "/" && "border-b-2 border-blue-500"
                 }`}
               >
                 Home
               </Link>
               <Link
                 href="/jobs"
-                className={`text-gray-600 hover:text-green-600 font-medium transition-colors duration-200 text-sm lg:text-base ${
-                  pathname === "/jobs" && "border-b-2 border-green-500"
+                className={`text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200 text-sm lg:text-base ${
+                  pathname === "/jobs" && "border-b-2 border-blue-500"
                 }`}
               >
                 Jobs
               </Link>
               <Link
                 href="/about"
-                className={`text-gray-600 hover:text-green-600 font-medium transition-colors duration-200 text-sm lg:text-base ${
-                  pathname === "/about" && "border-b-2 border-green-500"
+                className={`text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200 text-sm lg:text-base ${
+                  pathname === "/about" && "border-b-2 border-blue-500"
                 }`}
               >
                 About
               </Link>
               <Link
                 href="/service"
-                className={`text-gray-600 hover:text-green-600 font-medium transition-colors duration-200 text-sm lg:text-base ${
-                  pathname === "/service" && "border-b-2 border-green-500"
+                className={`text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200 text-sm lg:text-base ${
+                  pathname === "/service" && "border-b-2 border-blue-500"
                 }`}
               >
                 Services
@@ -120,7 +120,7 @@ const Navbar = () => {
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <button className="flex items-center space-x-3 p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                        <div className="h-8 w-8 outline-none rounded-full bg-green-100 flex items-center justify-center text-green-600 font-medium border-2 border-green-500">
+                        <div className="h-8 w-8 outline-none rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-medium border-2 border-blue-500">
                           {session?.user?.name?.charAt(0) || "U"}
                         </div>
                         <ChevronDown
@@ -156,17 +156,18 @@ const Navbar = () => {
                           </div>
                         </Link>
                       </DropdownMenuItem>
-                      {
-                        session?.user?.isAdmin ?
+                      {session?.user?.isAdmin ? (
                         <DropdownMenuItem className="cursor-pointer">
-                        <Link href="/dashboard">
-                          <div className="flex items-center space-x-2">
-                            <CircleGauge size={16} />
-                            <span>Dashboard</span>
-                          </div>
-                        </Link>
-                      </DropdownMenuItem>: ""
-                      }
+                          <Link href="/dashboard">
+                            <div className="flex items-center space-x-2">
+                              <CircleGauge size={16} />
+                              <span>Dashboard</span>
+                            </div>
+                          </Link>
+                        </DropdownMenuItem>
+                      ) : (
+                        ""
+                      )}
                       <DropdownMenuSeparator />
                       <DropdownMenuItem
                         onClick={handleSignOut}

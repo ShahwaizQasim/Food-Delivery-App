@@ -54,7 +54,6 @@ export default function LoginPage() {
         password: data?.password,
         redirect: false,
       });
-      console.log("login res", res);
       if (res?.error) {
         if (res?.error === "User Not Found") {
           Success(
@@ -111,14 +110,7 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-screen">
       {/* Left side - Branding */}
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-green-600 to-green-800 flex-col items-center justify-center p-12 text-white relative overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute top-0 left-0 w-full h-full">
-          <div className="absolute top-10 left-10 w-64 h-64 bg-green-500 rounded-full opacity-20 blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-80 h-80 bg-green-400 rounded-full opacity-20 blur-3xl"></div>
-          <div className="absolute top-1/3 right-1/4 w-40 h-40 bg-white rounded-full opacity-10 blur-xl"></div>
-        </div>
-
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-700 to-blue-400  items-center justify-center p-12 text-white relative overflow-hidden">
         <div className="relative z-10 max-w-md text-center">
           <div className="flex justify-center mb-8">
             <div className="h-24 w-24 rounded-full bg-white flex items-center justify-center shadow-lg mb-2">
@@ -140,7 +132,7 @@ export default function LoginPage() {
           <div className="grid grid-cols-1 gap-6 mb-10">
             <div className="bg-white/10 p-6 rounded-xl backdrop-blur-sm border border-white/20 transform transition-all hover:scale-105 hover:bg-white/15">
               <div className="flex items-start mb-3">
-                <div className="p-2 bg-green-500/30 rounded-lg mr-3">
+                <div className="p-2 bg-blue-500/30 rounded-lg mr-3">
                   <Search className="h-6 w-6 text-white" />
                 </div>
                 <div className="text-left">
@@ -155,7 +147,7 @@ export default function LoginPage() {
             </div>
             <div className="bg-white/10 p-6 rounded-xl backdrop-blur-sm border border-white/20 transform transition-all hover:scale-105 hover:bg-white/15">
               <div className="flex items-start mb-3">
-                <div className="p-2 bg-green-500/30 rounded-lg mr-3">
+                <div className="p-2 bg-blue-500/30 rounded-lg mr-3">
                   <Briefcase className="h-6 w-6 text-white" />
                 </div>
                 <div className="text-left">
@@ -174,7 +166,7 @@ export default function LoginPage() {
       <div className="w-full lg:w-1/2 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50 relative bottom-18">
         <Card className="w-full max-w-md p-8 shadow-xl border-0 bg-white">
           <div className="lg:hidden flex justify-center mb-8">
-            <div className="h-16 w-16 rounded-full bg-green-600 flex items-center justify-center shadow-lg">
+            <div className="h-16 w-16 rounded-full bg-blue-600 flex items-center justify-center shadow-lg">
               <img
                 src="/unnamed.png"
                 alt="Saylani Welfare Logo"
@@ -205,7 +197,7 @@ export default function LoginPage() {
                   <Input
                     type="email"
                     placeholder="youremail@example.com"
-                    className="pl-10 bg-gray-50 border-gray-200 py-5 focus:border-green-500 focus:ring-green-500 rounded-lg"
+                    className="pl-10 bg-gray-50 border-gray-200 py-5 focus:border-blue-500 focus:ring-blue-500 rounded-lg"
                     {...register("email", { required: true })}
                   />
                   {errors.email && (
@@ -226,7 +218,7 @@ export default function LoginPage() {
                   </Label>
                   <Link
                     href="/forgotpassword"
-                    className="text-sm text-green-600 hover:text-green-800 hover:underline font-medium"
+                    className="text-sm text-blue-600 hover:text-blue-800 hover:underline font-medium"
                   >
                     Forgot password?
                   </Link>
@@ -236,7 +228,7 @@ export default function LoginPage() {
                   <Input
                     type={showPassword ? "text" : "password"}
                     placeholder="••••••••"
-                    className="pl-10 pr-10 py-5 bg-gray-50 border-gray-200 focus:border-green-500 focus:ring-green-500 rounded-lg"
+                    className="pl-10 pr-10 py-5 bg-gray-50 border-gray-200 focus:border-blue-500 focus:ring-blue-500 rounded-lg"
                     {...register("password", { required: true })}
                   />
                   {errors.password && (
@@ -255,7 +247,7 @@ export default function LoginPage() {
               </div>
               <Button
                 type="submit"
-                className="w-full bg-green-600 hover:bg-green-700 text-white py-6 rounded-lg flex items-center justify-center transition-all font-medium text-base"
+                className="w-full bg-gradient-to-br from-blue-700 to-blue-400 hover:bg-blue-700 text-white py-6 rounded-lg flex items-center justify-center transition-all font-medium text-base"
               >
                 {loading ? (
                   "loading...."
@@ -318,7 +310,7 @@ export default function LoginPage() {
                   Don't have an account?{" "}
                   <Link
                     href="/signup"
-                    className="text-green-600 hover:text-green-800 hover:underline font-semibold"
+                    className="text-blue-600 hover:text-blue-800 hover:underline font-semibold"
                   >
                     Create an account
                   </Link>

@@ -151,7 +151,7 @@ const ProfilePage: NextPage = () => {
           <div className="flex gap-4 justify-center mt-3">
             <button
               onClick={() => setIsModalOpen(true)}
-              className="bg-gradient-to-tr from-emerald-200 to-emerald-400 text-emerald-800 px-8 py-3 mt-4 text-lg rounded-lg transition duration-300 transform hover:-translate-y-1 hover:shadow-lg font-medium"
+              className="bg-gradient-to-br from-blue-700 to-blue-400 text-white px-8 py-3 mt-4 text-lg rounded-lg transition duration-300 transform hover:-translate-y-1 hover:shadow-lg font-medium"
             >
               Edit Profile
             </button>
@@ -165,7 +165,7 @@ const ProfilePage: NextPage = () => {
           <div className="bg-white rounded-lg shadow-xl w-full max-w-md mx-auto p-6 animate-fade-in-down">
             {/* Modal Header */}
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-semibold text-emerald-800">
+              <h3 className="text-xl font-semibold text-blue-800">
                 Edit Profile
               </h3>
               <button
@@ -193,7 +193,7 @@ const ProfilePage: NextPage = () => {
             <form onSubmit={handleSubmit}>
               {/* Profile Picture in Modal */}
               <div className="mb-4 flex flex-col items-center">
-                <div className="h-24 w-24 text-4xl bg-emerald-400 rounded-full flex items-center justify-center text-white font-semibold mb-2 overflow-hidden">
+                <div className="h-24 w-24 text-4xl bg-blue-400 rounded-full flex items-center justify-center text-white font-semibold mb-2 overflow-hidden">
                   {imagePreview ? (
                     <img
                       src={imagePreview}
@@ -205,7 +205,7 @@ const ProfilePage: NextPage = () => {
                   )}
                 </div>
 
-                <label className="cursor-pointer px-3 py-1.5 text-sm bg-emerald-100 text-emerald-700 rounded-md hover:bg-emerald-200 transition-colors">
+                <label className="cursor-pointer px-3 py-1.5 text-sm bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors">
                   <span>Change Photo</span>
                   <input
                     type="file"
@@ -227,7 +227,7 @@ const ProfilePage: NextPage = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-400  bg-white text-gray-900"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400  bg-white text-gray-900"
                   required
                   disabled={isLoading}
                 />
@@ -243,7 +243,7 @@ const ProfilePage: NextPage = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-400 bg-white text-gray-900 "
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white text-gray-900 "
                   required
                   disabled={isLoading}
                 />
@@ -259,7 +259,7 @@ const ProfilePage: NextPage = () => {
                   value={formData.profileBio}
                   onChange={handleChange}
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-400 bg-white text-gray-900"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white text-gray-900"
                   disabled={isLoading}
                 />
               </div>
@@ -276,7 +276,7 @@ const ProfilePage: NextPage = () => {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-gradient-to-tr from-emerald-300 to-emerald-500 text-white rounded-md hover:from-emerald-400 hover:to-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-400 flex items-center"
+                  className="px-4 py-2 bg-gradient-to-tr from-blue-300 to-blue-500 text-white rounded-md hover:from-blue-400 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 flex items-center"
                   disabled={isLoading}
                 >
                   {isLoading ? (

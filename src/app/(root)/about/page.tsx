@@ -17,7 +17,7 @@ const AboutPage: React.FC = () => {
     <>
       <main className="bg-gray-50 mb-24">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-r from-green-600 to-green-400 text-white">
+        <section className="relative bg-gradient-to-br from-blue-700 to-blue-400 text-white">
           <div className="container mx-auto px-8 md:py-12">
             <div className="max-w-3xl">
               <h1 className="text-4xl md:text-4xl font-bold mb-2 mt-2">
@@ -28,7 +28,7 @@ const AboutPage: React.FC = () => {
                 opportunities
               </p>
               <div className="flex items-center">
-                <button className="bg-white text-green-600 px-6 py-3 rounded-md font-medium hover:bg-blue-50 transition-colors">
+                <button className="bg-white text-blue-600 px-6 py-3 rounded-md font-medium hover:bg-blue-50 transition-colors">
                   Explore Jobs
                 </button>
                 <button className="ml-4 flex items-center text-white font-medium hover:underline">
@@ -55,7 +55,7 @@ const AboutPage: React.FC = () => {
                 </div>
               </div>
               <div className="w-full md:w-1/2">
-                <h2 className="text-3xl font-bold mb-6 text-gray-800">
+                <h2 className="text-3xl font-bold mb-6 text-blue-500">
                   Our Mission
                 </h2>
                 <p className="text-lg text-gray-600 mb-6">
@@ -76,7 +76,7 @@ const AboutPage: React.FC = () => {
           </div>
         </section>
       <div className="container mx-auto px-14 bg-gray-50 transition-colors duration-300">
-        <h1 className="text-4xl font-semibold mt-10 text-[#16A34A]">
+        <h1 className="text-4xl font-semibold mt-10 text-blue-500">
           Empowering Futures with Opportunities
         </h1>
         <p className="mt-5">
@@ -89,7 +89,7 @@ const AboutPage: React.FC = () => {
           growth.
         </p>
 
-        <h1 className="text-4xl font-semibold mt-10 text-[#16A34A]">
+        <h1 className="text-4xl font-semibold mt-10 text-blue-500">
           Our Mission
         </h1>
         <p className="mt-5">
@@ -98,7 +98,7 @@ const AboutPage: React.FC = () => {
           especially those who are underprivileged or in need.
         </p>
 
-        <h1 className="text-4xl font-semibold mt-10 text-[#16A34A]">
+        <h1 className="text-4xl font-semibold mt-10 text-blue-500">
           What We Offer
         </h1>
         <ol className="list-decimal pl-8 mt-5">

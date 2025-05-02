@@ -22,10 +22,9 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-gradient-to-b from-gray-900 to-gray-500 text-white pt-16 pb-8">
-      <ScrollToTopButton />
-
+    <footer className="relative bg-gradient-to-br from-blue-900 to-blue-400 text-white pt-16 pb-8">
       <div className="container mx-auto px-12">
+        <ScrollToTopButton />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* About Section */}
           <div className="relative">
@@ -65,7 +64,6 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="relative">
-            <div className="absolute -top-2 left-0 w-16 h-1 bg-saylani-green rounded-full"></div>
             <h3 className="text-2xl font-bold mb-6 pt-4">Quick Links</h3>
             <ul className="space-y-3">
               <li>
@@ -215,7 +213,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Section with Copyright */}
-        <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <div className="border-t border-white mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-300 text-center md:text-left">
             &copy; {new Date().getFullYear()} Saylani Jobs Portal. All rights
             reserved.

@@ -15,15 +15,15 @@ const ServiceCard = ({ service }: { service: any }) => (
         <ul className="space-y-2">
           {service.features.map((feature, idx) => (
             <li key={idx} className="flex items-center text-gray-600">
-              <ArrowRight className="w-4 h-4 text-green-500 mr-2" />
+              <ArrowRight className="w-4 h-4 text-blue-500 mr-2" />
               {feature}
             </li>
           ))}
         </ul>
       </div>
     </div>
-    <div className="bg-green-50 px-6 py-3">
-      <button className="text-green-600 font-medium hover:text-green-700 transition-colors flex items-center">
+    <div className="bg-blue-50 px-6 py-3">
+      <button className="text-blue-600 font-medium hover:text-blue-700 transition-colors flex items-center">
         Learn more <ChevronRight className="w-4 h-4 ml-1" />
       </button>
     </div>

@@ -52,7 +52,7 @@ const Topbar = ({ toggleSidebar, expanded }: TopbarProps) => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button className="flex items-center space-x-3 p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                <div className="h-8 w-8 bg-emerald-400 rounded-full flex items-center justify-center text-white font-semibold">
+                <div className="h-8 w-8 bg-blue-400 rounded-full flex items-center justify-center text-white font-semibold">
                   {session?.user?.name?.charAt(0)||"U"}
                 </div>
                 <div className="hidden md:block text-left">

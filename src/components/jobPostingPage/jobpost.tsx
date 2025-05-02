@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import axios from "axios";
+import { Success } from "../sweetAlert2/alert";
 
 // Job Form Schema
 const jobFormSchema = z.object({
@@ -12,33 +13,44 @@ const jobFormSchema = z.object({
     .min(3, { message: "Job title must be at least 3 characters" }),
   company: z.string().min(2, { message: "Company name is required" }),
   location: z.string().min(2, { message: "Location is required" }),
-  type: z.enum(["Full-time", "Part-time", "Contract", "Internship", "Remote"]),
+  jobType: z.enum([
+    "Full-time",
+    "Part-time",
+    "Contract",
+    "Internship",
+    "Remote",
+  ]),
   salary: z.string().optional(),
-  experience: z.enum(
-    ["Entry Level","0-6 month", "0-1 year",  "1-3 years", "3-5 years", "5+ years", "Senior Level"]
-  ),
+  experienceLevel: z.enum([
+    "Entry Level",
+    "0-6 month",
+    "0-1 year",
+    "1-3 years",
+    "3-5 years",
+    "5+ years",
+    "Senior Level",
+  ]),
   category: z.string().min(1, { message: "Job category is required" }),
-  skills: z.string().min(1, { message: "Skills are required" }),
+  skillsRequired: z.string().min(1, { message: "Skills are required" }),
   description: z
     .string()
     .min(10, { message: "Job description must be at least 10 characters" }),
   responsibilities: z
     .string()
     .min(10, { message: "Responsibilities must be at least 10 characters" }),
-  qualifications: z
+  qualification: z
     .string()
     .min(10, { message: "Qualifications must be at least 10 characters" }),
   deadline: z.string(),
   contactEmail: z
     .string()
     .email({ message: "Please enter a valid email address" }),
-  featured: z.boolean().default(false),
 });
 
 type JobFormData = z.infer<typeof jobFormSchema>;
 
 const JobPostingForm = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [submitMessage, setSubmitMessage] = useState({ type: "", message: "" });
 
   const {
@@ -51,17 +63,27 @@ const JobPostingForm = () => {
   });
 
   const onSubmit = async (data: JobFormData) => {
-    setIsSubmitting(true);
+    setLoading(true);
     setSubmitMessage({ type: "", message: "" });
     try {
       console.log("data", data);
-    //  const response =  await axios.post('/api/jobPost', data);
-    //  console.log("response", response);
-     
+      const response = await axios.post("/api/jobPost", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response?.data) {
+        Success("Job Post Successfully", "success");
+        reset();
+      } else {
+        Success("Incomplete Input Data", "error");
+      }
+      console.log("response", response);
     } catch (error) {
       console.log("error", error);
+      Success((error as Error).message, "error");
     } finally {
-      setIsSubmitting(false);
+      setLoading(false);
     }
   };
 
@@ -153,14 +175,14 @@ const JobPostingForm = () => {
 
           <div>
             <label
-              htmlFor="type"
+              htmlFor="jobType"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
-              Job Type *
+              Job Type
             </label>
             <select
-              id="type"
-              {...register("type")}
+              id="jobType"
+              {...register("jobType")}
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
             >
               <option value="Full-time">Full-time</option>
@@ -189,21 +211,21 @@ const JobPostingForm = () => {
 
           <div>
             <label
-              htmlFor="experience"
+              htmlFor="experienceLevel"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
               Experience Level *
             </label>
             <select
-              id="experience"
-              {...register("experience")}
+              id="experienceLevel"
+              {...register("experienceLevel")}
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
             >
               <option value="Entry Level" disabled>
                 Entry Level
               </option>
               <option value="0-6 month">0-6 month</option>
-              <option value="1-1.5 year">0-1 year</option>
+              <option value="0-1 year">0-1 year</option>
               <option value="1-3 years">1-3 years</option>
               <option value="3-5 years">3-5 years</option>
               <option value="5+ years">5+ years</option>
@@ -291,14 +313,16 @@ const JobPostingForm = () => {
           <input
             type="text"
             id="skills"
-            {...register("skills")}
+            {...register("skillsRequired")}
             className={`w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none ${
-              errors.skills ? "border-red-500" : "border-gray-300"
+              errors.skillsRequired ? "border-red-500" : "border-gray-300"
             }`}
             placeholder="e.g. React, Node.js, TypeScript, MongoDB"
           />
-          {errors.skills && (
-            <p className="mt-1 text-sm text-red-600">{errors.skills.message}</p>
+          {errors.skillsRequired && (
+            <p className="mt-1 text-sm text-red-600">
+              {errors.skillsRequired.message}
+            </p>
           )}
           <p className="mt-1 text-xs text-gray-500">
             Separate skills with commas
@@ -354,29 +378,29 @@ const JobPostingForm = () => {
 
         <div>
           <label
-            htmlFor="qualifications"
+            htmlFor="qualification"
             className="block text-sm font-medium text-gray-700 mb-1"
           >
-            Qualifications *
+            Qualification *
           </label>
           <textarea
-            id="qualifications"
-            {...register("qualifications")}
+            id="qualification"
+            {...register("qualification")}
             rows={4}
             className={`w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none ${
-              errors.qualifications ? "border-red-500" : "border-gray-300"
+              errors.qualification ? "border-red-500" : "border-gray-300"
             }`}
             placeholder="List required qualifications and education..."
           ></textarea>
-          {errors.qualifications && (
+          {errors.qualification && (
             <p className="mt-1 text-sm text-red-600">
-              {errors.qualifications.message}
+              {errors.qualification.message}
             </p>
           )}
         </div>
 
         {/* Featured Job Option */}
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <input
             type="checkbox"
             id="featured"
@@ -389,16 +413,16 @@ const JobPostingForm = () => {
           >
             Mark as featured job (will appear at the top of listings)
           </label>
-        </div>
+        </div> */}
 
         {/* Submit Button */}
         <div className="flex justify-end">
           <button
             type="submit"
-            disabled={isSubmitting}
+            disabled={loading}
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md font-medium flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-75"
           >
-            {isSubmitting ? (
+            {loading ? (
               <>
                 <svg
                   className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"

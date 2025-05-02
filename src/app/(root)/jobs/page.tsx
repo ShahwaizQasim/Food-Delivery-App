@@ -272,14 +272,14 @@ export default function JobsPage() {
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* Page Header */}
-      <div className="bg-gradient-to-r from-green-600 to-green-400 text-white py-16">
+      <div className="bg-gradient-to-br from-blue-700 to-blue-400 text-white py-16 px-8">
         <div className="container mx-auto px-2">
           <h1 className="text-4xl font-bold">Career Opportunities</h1>
           <p className="mt-4 text-lg opacity-90">Discover meaningful work and grow your career with Saylani Welfare Trust</p>
         </div>
       </div>
       
-      <div className="container mx-auto px-4 py-8 -mt-8">
+      <div className="container mx-auto px-8 py-8 -mt-8">
         {/* Filters */}
         <JobFilter onFilter={handleFilter} />
         

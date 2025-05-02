@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
-import Layout from '../layout';
+import Layout from '../../layout';
 import JobPostingForm from '@/components/jobPostingPage/jobpost';
 
 const PostJobPage: NextPage = () => {

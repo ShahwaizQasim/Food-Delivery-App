@@ -17,7 +17,6 @@ const PostJobSchema = new Schema({
   location: {
     type: String,
     required: true,
-    enum: ["Karachi", "Lahore", "Islamabad", "Remote", "Other"],
   },
   jobType: {
     type: String,
@@ -25,19 +24,21 @@ const PostJobSchema = new Schema({
     enum: ["Full-time", "Part-time", "Internship", "Contract"],
   },
   salary: {
-    min: { type: Number },
-    max: { type: Number },
-    currency: { type: String, default: "PKR" },
+    type: String,
+    required: true,
+  },
+  category: {
+    type: String,
+    required: true,
   },
   experienceLevel: {
     type: String,
-    enum: ["Fresh", "1 Year", "2+ Years"],
-    default: "Fresh",
+    required: true,
   },
   qualification: {
     type: String,
-    enum: ["Matric", "Intermediate", "Bachelor", "Master"],
     default: "Intermediate",
+    required: true,
   },
   skillsRequired: {
     type: String,
@@ -51,7 +52,7 @@ const PostJobSchema = new Schema({
     type: Date,
     required: true,
   },
-  responsibilites: {
+  responsibilities: {
     type: String,
     required: true,
   },

@@ -5,14 +5,12 @@ import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   ClipboardList,
-  CloudUpload,
-  FileText,
   User,
-  GitCompareArrows,
-  Edit,
+  ChevronDown,
+  ChevronRight,
 } from "lucide-react";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface SidebarProps {
   expanded: boolean;
@@ -20,6 +18,7 @@ interface SidebarProps {
 
 const Sidebar = ({ expanded }: SidebarProps) => {
   const pathname = usePathname();
+  const [checkSheetOpen, setCheckSheetOpen] = useState(false);
 
   // Log expanded state for debugging
   useEffect(() => {
@@ -42,8 +41,12 @@ const Sidebar = ({ expanded }: SidebarProps) => {
       icon: <ClipboardList size={20} />,
       path: "/dashboard/applicationReviews",
     },
- 
-    { name: "Profile", icon: <User size={20} />, path: "/dashboard/adminProfile" },
+
+    {
+      name: "Profile",
+      icon: <User size={20} />,
+      path: "/dashboard/adminProfile",
+    },
   ];
 
   return (
@@ -78,27 +81,22 @@ const Sidebar = ({ expanded }: SidebarProps) => {
         <ul className="flex-1 px-3">
           {menuItems.map((item) => {
             const isActive = pathname === item.path;
+
             return (
               <Link href={item.path} key={item.path}>
                 <li
                   className={`relative flex items-center overflow-hidden py-3 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group ${
                     isActive
-                      ? "bg-gradient-to-tr from-emerald-200 to-emerald-400 text-emerald-800"
-                      : "hover:bg-emerald-100 text-emerald-800 hover:text-emerald-800"
+                      ? "bg-gradient-to-br from-blue-700 to-blue-400 text-white"
+                      : "hover:bg-blue-100 text-black hover:text-blue-800"
                   } border-none outline-none`}
                 >
                   {isActive && (
-                    <div className="absolute left-0 w-1 h-8 bg-emerald-800 rounded-r-full" />
+                    <div className="absolute left-0 w-1 h-8 bg-blue-800 rounded-r-full" />
                   )}
 
                   <div className="flex items-center bg-transparent gap-2">
-                    <div
-                      className={
-                        isActive
-                          ? "text-emerald-800"
-                          : ""
-                      }
-                    >
+                    <div className={isActive ? "text-white" : ""}>
                       {item.icon}
                     </div>
 

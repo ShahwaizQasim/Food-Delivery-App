@@ -80,7 +80,7 @@ export default function SignupPage() {
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-green-50 to-emerald-50">
       {/* Left side banner */}
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-green-600 to-emerald-700 flex-col justify-between items-center text-white pt-[105px]">
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-700 to-blue-400 flex-col justify-between items-center text-white pt-[105px]">
         <div className="w-full max-w-md">
           <div className="mb-8 pt-10">
             <h1 className="text-4xl font-bold mb-6">Saylani Job Portal</h1>
@@ -137,7 +137,7 @@ export default function SignupPage() {
         {/* <Card className="w-full p-8 relative bottom-11"> */}
         <div className="text-center mb-8">
           <div className="flex justify-center mb-5">
-            <div className="h-16 w-16 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
+            <div className="h-16 w-16 bg-gradient-to-br from-blue-700 to-blue-400 rounded-full flex items-center justify-center shadow-lg">
               <UserPlus className="h-8 w-8 pl-1 text-white" />
             </div>
           </div>
@@ -158,10 +158,10 @@ export default function SignupPage() {
               Full Name
             </Label>
             <div className="relative">
-              <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <User className="absolute left-3 top-4 h-4 w-4 text-gray-400" />
               <Input
                 placeholder="Enter your FullName"
-                className="pl-10 h-12 rounded-lg border-gray-200 focus:border-green-500 focus:ring-green-500"
+                className="pl-10 h-12 rounded-lg border-gray-200 focus:border-blue-500 focus:ring-blue-500"
                 {...register("name", { required: true })}
               />
               {errors.name && (
@@ -180,11 +180,11 @@ export default function SignupPage() {
               Email Address
             </Label>
             <div className="relative">
-              <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <Mail className="absolute left-3 top-4 h-4 w-4 text-gray-400" />
               <Input
                 type="email"
                 placeholder="you@example.com"
-                className="pl-10 h-12 rounded-lg border-gray-200 focus:border-green-500 focus:ring-green-500"
+                className="pl-10 h-12 rounded-lg border-gray-200 focus:border-blue-500 focus:ring-blue-500"
                 {...register("email", { required: true })}
               />
               {errors.email && (
@@ -203,11 +203,11 @@ export default function SignupPage() {
               Password
             </Label>
             <div className="relative">
-              <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <Lock className="absolute left-3 top-4 h-4 w-4 text-gray-400" />
               <Input
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
-                className="pl-10 pr-10 h-12 rounded-lg border-gray-200 focus:border-green-500 focus:ring-green-500"
+                className="pl-10 pr-10 h-12 rounded-lg border-gray-200 focus:border-blue-400 focus:ring-blue-500"
                 {...register("password", { required: true })}
               />
               <button
@@ -226,7 +226,7 @@ export default function SignupPage() {
           </div>
           <Button
             type="submit"
-            className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white h-12 font-medium mt-6 rounded-lg shadow-md"
+            className="w-full bg-gradient-to-br from-blue-700 to-blue-400 hover:from-blue-600 hover:to-emerald-700 text-white h-12 font-medium mt-6 rounded-lg shadow-md"
           >
             {loading ? "loading...." : "Create Account"}
           </Button>
@@ -236,7 +236,7 @@ export default function SignupPage() {
               Already have an account?{" "}
               <Link
                 href="/login"
-                className="text-green-600 hover:underline font-medium"
+                className="text-blue-600 hover:underline font-medium"
               >
                 Sign in
               </Link>
