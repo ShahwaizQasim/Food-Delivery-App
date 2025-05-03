@@ -39,25 +39,25 @@ export default function PostJobPage() {
       filtered = filtered.filter(
         (job) =>
           job.title.toLowerCase().includes(filters.keyword.toLowerCase()) ||
-          job.description.toLowerCase().includes(filters.keyword.toLowerCase())
+          job?.description.toLowerCase().includes(filters.keyword.toLowerCase())
       );
     }
 
     if (filters.location && filters.location !== "all-locations") {
       filtered = filtered.filter(
-        (job) => job.location.toLowerCase() === filters.location.toLowerCase()
+        (job) => job?.location.toLowerCase() === filters.location.toLowerCase()
       );
     }
 
     if (filters.category && filters.category !== "all-categories") {
       filtered = filtered.filter(
-        (job) => job.category.toLowerCase() === filters.category.toLowerCase()
+        (job) => job?.category.toLowerCase() === filters.category.toLowerCase()
       );
     }
 
     if (filters.type && filters.type !== "all-types") {
       filtered = filtered.filter(
-        (job) => job.type.toLowerCase() === filters.type.toLowerCase()
+        (job) => job?.type?.toLowerCase() === filters.type.toLowerCase()
       );
     }
 
@@ -125,7 +125,7 @@ export default function PostJobPage() {
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               {currentJobs.map((job) => (
-                <JobCard key={job.id} {...job} />
+                <JobCard key={job?.id} {...job} />
               ))}
             </div>
 

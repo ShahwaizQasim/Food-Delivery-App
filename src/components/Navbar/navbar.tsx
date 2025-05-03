@@ -187,14 +187,14 @@ const Navbar = () => {
                 <Link href="/login">
                   <Button
                     variant="outline"
-                    className="flex items-center gap-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white transition-colors duration-300 rounded-md px-4 py-2 text-sm font-medium"
+                    className="flex items-center gap-2 border-blue-500 text-blue-600 hover:bg-blue-500 hover:text-white transition-colors duration-300 rounded-md px-4 py-2 text-sm font-medium"
                   >
                     <LogIn size={16} />
                     Login
                   </Button>
                 </Link>
                 <Link href="/signup">
-                  <Button className="bg-green-500 hover:bg-green-600 flex items-center gap-2 transition-colors duration-300 rounded-md px-4 py-2 text-white text-sm font-medium">
+                  <Button className="bg-blue-500 hover:bg-blue-600 flex items-center gap-2 transition-colors duration-300 rounded-md px-4 py-2 text-white text-sm font-medium">
                     <User size={16} />
                     Sign Up
                   </Button>
