@@ -49,7 +49,7 @@ const jobFormSchema = z.object({
 
 type JobFormData = z.infer<typeof jobFormSchema>;
 
-const JobPostingForm = () => {
+const JobPostingForm = ({setIsModalOpen}:{setIsModalOpen: boolean}) => {
   const [loading, setLoading] = useState(false);
   const [submitMessage, setSubmitMessage] = useState({ type: "", message: "" });
 
@@ -75,6 +75,7 @@ const JobPostingForm = () => {
       if (response?.data) {
         Success("Job Post Successfully", "success");
         reset();
+        setIsModalOpen(false)
       } else {
         Success("Incomplete Input Data", "error");
       }
@@ -277,7 +278,7 @@ const JobPostingForm = () => {
               </p>
             )}
           </div>
-
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> */}
           <div>
             <label
               htmlFor="contactEmail"
@@ -300,7 +301,7 @@ const JobPostingForm = () => {
               </p>
             )}
           </div>
-        </div>
+        {/* </div> */}
 
         {/* Skills Required */}
         <div>
@@ -328,13 +329,14 @@ const JobPostingForm = () => {
             Separate skills with commas
           </p>
         </div>
+     
 
         {/* Detailed Information */}
         <div>
           <label
             htmlFor="description"
             className="block text-sm font-medium text-gray-700 mb-1"
-          >
+            >
             Job Description *
           </label>
           <textarea
@@ -368,7 +370,7 @@ const JobPostingForm = () => {
               errors.responsibilities ? "border-red-500" : "border-gray-300"
             }`}
             placeholder="List the key responsibilities for this position..."
-          ></textarea>
+            ></textarea>
           {errors.responsibilities && (
             <p className="mt-1 text-sm text-red-600">
               {errors.responsibilities.message}
@@ -376,6 +378,7 @@ const JobPostingForm = () => {
           )}
         </div>
 
+          </div>
         <div>
           <label
             htmlFor="qualification"
@@ -391,7 +394,7 @@ const JobPostingForm = () => {
               errors.qualification ? "border-red-500" : "border-gray-300"
             }`}
             placeholder="List required qualifications and education..."
-          ></textarea>
+            ></textarea>
           {errors.qualification && (
             <p className="mt-1 text-sm text-red-600">
               {errors.qualification.message}

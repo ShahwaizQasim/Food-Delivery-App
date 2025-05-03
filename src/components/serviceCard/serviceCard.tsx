@@ -13,7 +13,7 @@ const ServiceCard = ({ service }: { service: any }) => (
       <div className="border-t border-gray-100 pt-4">
         <p className="font-medium text-gray-800 mb-2">Features:</p>
         <ul className="space-y-2">
-          {service.features.map((feature, idx) => (
+          {service.features.map(({ feature, idx }: any) => (
             <li key={idx} className="flex items-center text-gray-600">
               <ArrowRight className="w-4 h-4 text-blue-500 mr-2" />
               {feature}

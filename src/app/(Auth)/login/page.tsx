@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { boolean, z } from "zod";
 import { signIn, useSession } from "next-auth/react";
 import { Success } from "@/components/sweetAlert2/alert";
 import { useRouter } from "next/navigation";
@@ -85,8 +85,8 @@ export default function LoginPage() {
   useEffect(() => {
     if (status === "authenticated" && !session?.user?.isAdmin) {
       router.push("/");
-    }else if(status === "authenticated" && session?.user?.isAdmin){
-      router.push('/dashboard');
+    } else if (status === "authenticated" && session?.user?.isAdmin) {
+      router.push("/dashboard");
     }
   }, [status, session, router]);
 

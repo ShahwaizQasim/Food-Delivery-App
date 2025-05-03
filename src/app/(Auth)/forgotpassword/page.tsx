@@ -21,7 +21,7 @@ const ForgotPassword: NextPage<Props> = ({}) => {
     reset,
   } = useForm();
 
-  const onSubmit = async (data: string) => {
+  const onSubmit = async (data: any) => {
     try {
       console.log("data", data);
       setLoading(true);
