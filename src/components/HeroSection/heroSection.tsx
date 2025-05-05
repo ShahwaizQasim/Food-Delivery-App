@@ -10,42 +10,30 @@ function HeroSection() {
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-50 rounded-full translate-x-1/3 translate-y-1/3"></div>
       <div className="absolute top-1/4 right-10 w-20 h-20 bg-blue-100 rounded-full opacity-40"></div>
       <div className="absolute bottom-1/3 left-1/4 w-32 h-32 bg-blue-50 rounded-full opacity-60"></div>
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-5xl mx-auto text-center">
           <div className="mb-6 inline-flex items-center bg-blue-50 rounded-full px-4 py-2">
-            <span className="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full mr-2">NEW</span>
-            <span className="text-blue-700">Saylani is hiring for multiple positions across Pakistan</span>
+            <span className="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full mr-2">
+              NEW
+            </span>
+            <span className="text-blue-700">
+              Saylani is hiring for multiple positions across Pakistan
+            </span>
           </div>
-          
+
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
             Build Your Career with <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-blue-700">Saylani Welfare</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-blue-700">
+              Saylani Welfare
+            </span>
           </h1>
-          
+
           <p className="text-lg md:text-xl mb-10 text-gray-600 max-w-2xl mx-auto">
-            Join Pakistan's largest welfare organization and make a meaningful impact while advancing your professional journey.
+            Join Pakistan's largest welfare organization and make a meaningful
+            impact while advancing your professional journey.
           </p>
-          
-          <div className="bg-gray-50 p-6 rounded-xl shadow-md max-w-3xl mx-auto mb-10 border border-gray-100">
-            <div className="flex flex-col md:flex-row items-center gap-4">
-              <div className="flex-1 w-full">
-                <div className="bg-white rounded-lg p-4 flex items-center border border-gray-200">
-                  <Search size={20} className="text-blue-500 mr-3" />
-                  <span className="text-gray-400">Search for job opportunities...</span>
-                </div>
-              </div>
-              <Link href="/jobs" className="w-full md:w-auto">
-                <Button
-                  size="lg"
-                  className="bg-blue-500 text-white hover:bg-blue-600 font-medium px-8 py-6 w-full md:w-auto"
-                >
-                  Find Jobs
-                </Button>
-              </Link>
-            </div>
-          </div>
-          
+
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
             <Link href="/jobs">
               <Button
@@ -67,16 +55,20 @@ function HeroSection() {
               </Button>
             </Link>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto relative top-12">
             <div className="bg-white rounded-xl p-6 text-center hover:shadow-lg transition border border-gray-100 shadow-sm">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-blue-700 font-bold text-sm">100+</span>
               </div>
-              <h3 className="font-bold text-lg text-gray-800">Open Positions</h3>
-              <p className="text-gray-500 text-sm">Across multiple departments</p>
+              <h3 className="font-bold text-lg text-gray-800">
+                Open Positions
+              </h3>
+              <p className="text-gray-500 text-sm">
+                Across multiple departments
+              </p>
             </div>
-            
+
             <div className="bg-white rounded-xl p-6 text-center hover:shadow-lg transition border border-gray-100 shadow-sm">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-blue-700 font-bold text-sm">15+</span>
@@ -84,7 +76,7 @@ function HeroSection() {
               <h3 className="font-bold text-lg text-gray-800">Locations</h3>
               <p className="text-gray-500 text-sm">Throughout Pakistan</p>
             </div>
-            
+
             <div className="bg-white rounded-xl p-6 text-center hover:shadow-lg transition border border-gray-100 shadow-sm">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-blue-700 font-bold text-sm">50k+</span>

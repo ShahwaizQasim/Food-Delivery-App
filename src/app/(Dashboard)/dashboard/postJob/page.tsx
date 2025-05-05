@@ -32,14 +32,14 @@ export default function PostJobPage() {
     fetchJobsData();
   }, []);
 
-  const handleFilter = (filters) => {
+  const handleFilter = (filters:any) => {
     let filtered = [...filteredJobs];
 
     if (filters.keyword) {
       filtered = filtered.filter(
         (job) =>
           job.title.toLowerCase().includes(filters.keyword.toLowerCase()) ||
-          job?.description.toLowerCase().includes(filters.keyword.toLowerCase())
+          job.description.toLowerCase().includes(filters.keyword.toLowerCase())
       );
     }
 
@@ -125,7 +125,7 @@ export default function PostJobPage() {
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               {currentJobs.map((job) => (
-                <JobCard key={job?.id} {...job} />
+                <JobCard key={job.id} {...job} />
               ))}
             </div>
 
@@ -179,7 +179,7 @@ export default function PostJobPage() {
           </>
         ) : (
           <div className="bg-white rounded-xl shadow-md text-center py-16 px-4">
-            <h3 className="text-xl font-semibold mb-2">No jobs found</h3>
+            <h3 className="text-xl font-semibold mb-2">No jobs Data</h3>
             <p className="text-gray-600 mb-6">
               Try adjusting your filter criteria or check back later for new
               opportunities

@@ -76,7 +76,7 @@ export const authOptions: NextAuthOptions = {
           dbUser = await UserModel.create({
             name: user.name,
             email: user.email,
-            profilePic: user.image,
+            profilePic: user?.image,
             isAdmin: user.isAdmin,
             isVerified: true,
             provider: "google",

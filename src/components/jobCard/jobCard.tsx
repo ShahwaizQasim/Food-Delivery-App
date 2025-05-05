@@ -1,24 +1,21 @@
-import {
-  MapPin,
-  Briefcase,
-  Calendar,
-  ArrowRight,
-  Badge,
-} from "lucide-react";
+import { MapPin, Briefcase, Calendar, ArrowRight } from "lucide-react";
 import { Card } from "../ui/card";
 import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
+import Link from "next/link";
 
 export const JobCard = ({
+  id,
   title,
   location,
-  type,
+  jobType,
   category,
   postedDate,
   deadline,
   description,
 }: any) => {
   const getTypeColor = () => {
-    switch (type) {
+    switch (jobType) {
       case "Full-time":
         return "bg-green-100 text-green-800";
       case "Part-time":
@@ -30,6 +27,9 @@ export const JobCard = ({
     }
   };
 
+  console.log("id", id);
+  
+
   return (
     <div className="mx-auto">
       <Card className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
@@ -39,7 +39,7 @@ export const JobCard = ({
             <Badge
               className={`${getTypeColor()} font-medium text-xs px-2 py-1 rounded-md`}
             >
-              {type}
+              {jobType}
             </Badge>
           </div>
 
@@ -62,10 +62,12 @@ export const JobCard = ({
             </div>
           </div>
 
-          <Button className="w-full bg-gradient-to-r from-blue-700 to-blue-400 text-white">
-            Apply Now
-            <ArrowRight className="h-4 w-4 ml-2" />
-          </Button>
+          <Link href={`/jobs/${id}`}>
+            <Button className="w-full bg-gradient-to-r from-blue-700 to-blue-400 text-white">
+              Apply Now
+              <ArrowRight className="h-4 w-4 ml-2" />
+            </Button>
+          </Link>
         </div>
       </Card>
     </div>

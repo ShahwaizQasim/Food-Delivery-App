@@ -51,7 +51,7 @@ type JobFormData = z.infer<typeof jobFormSchema>;
 
 const JobPostingForm = ({setIsModalOpen}:{setIsModalOpen: boolean}) => {
   const [loading, setLoading] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState({ type: "", message: "" });
+  const [submitMessage, setSubmitMessage] = useState({ type: "", message: "" })
 
   const {
     register,
@@ -65,6 +65,8 @@ const JobPostingForm = ({setIsModalOpen}:{setIsModalOpen: boolean}) => {
   const onSubmit = async (data: JobFormData) => {
     setLoading(true);
     setSubmitMessage({ type: "", message: "" });
+    console.log("data", data);
+    
     try {
       console.log("data", data);
       const response = await axios.post("/api/jobPost", data, {
@@ -75,6 +77,7 @@ const JobPostingForm = ({setIsModalOpen}:{setIsModalOpen: boolean}) => {
       if (response?.data) {
         Success("Job Post Successfully", "success");
         reset();
+        window.location.reload();
         setIsModalOpen(false)
       } else {
         Success("Incomplete Input Data", "error");
