@@ -124,12 +124,12 @@ const ProfilePage: NextPage = () => {
       <div className="w-full min-h-screen bg-white">
         <div className="p-10 flex flex-col items-center">
           {/* Profile Picture */}
-          <div className="h-40 w-40 text-6xl bg-emerald-400 rounded-full flex items-center justify-center text-white font-semibold overflow-hidden">
+          <div className="h-40 w-40 text-6xl bg-blue-400 rounded-full flex items-center justify-center text-white font-semibold overflow-hidden">
             {imagePreview ? (
               <img
                 src={imagePreview}
                 alt="Profile"
-                className="h-full w-full object-cover"
+                className="h-full w-full text-sm object-cover"
               />
             ) : (
               session?.user?.name?.charAt(0) || "U"

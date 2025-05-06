@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select } from '@/components/ui/select';
@@ -9,15 +9,35 @@ import { Card } from '@/components/ui/card';
 import { ChevronLeft, ChevronRight, Search, MapPin, Briefcase, Calendar, ArrowRight } from 'lucide-react';
 import { JobCard } from '@/components/jobCard/jobCard';
 import { JobFilter } from '@/components/jobFilters/page';
-import { jobsData } from '@/components/mocksData/data';
+// import { jobsData } from '@/components/mocksData/data';
+import axios from 'axios';
 
 export default function JobsPage() {
-  const [filteredJobs, setFilteredJobs] = useState(jobsData);
+  const [JobsData, setJobsData] = useState([]);
+  const [filteredJobs, setFilteredJobs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false)
   const jobsPerPage = 6;
 
+  const fetchJobsData = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get("/api/jobPost");
+      setJobsData(response.data.jobsData)
+      setFilteredJobs(response.data.jobsData);
+    } catch (error) {
+      console.log("error", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+   useEffect(() => {
+      fetchJobsData();
+    }, []);
+
   const handleFilter = (filters) => {
-    let filtered = [...jobsData];
+    let filtered = [...JobsData];
     
     if (filters.keyword) {
       filtered = filtered.filter(job => 
@@ -53,6 +73,16 @@ export default function JobsPage() {
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
   const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
   const totalPages = Math.ceil(filteredJobs.length / jobsPerPage);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="bg-gray-50 min-h-screen">
