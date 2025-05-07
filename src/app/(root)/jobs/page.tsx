@@ -2,14 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Select } from '@/components/ui/select';
-import { Badge } from '@/components/ui/badge';
-import { Card } from '@/components/ui/card';
 import { ChevronLeft, ChevronRight, Search, MapPin, Briefcase, Calendar, ArrowRight } from 'lucide-react';
 import { JobCard } from '@/components/jobCard/jobCard';
 import { JobFilter } from '@/components/jobFilters/page';
-// import { jobsData } from '@/components/mocksData/data';
 import axios from 'axios';
 
 export default function JobsPage() {
@@ -36,13 +31,13 @@ export default function JobsPage() {
       fetchJobsData();
     }, []);
 
-  const handleFilter = (filters) => {
+  const handleFilter = (filters:any) => {
     let filtered = [...JobsData];
     
     if (filters.keyword) {
       filtered = filtered.filter(job => 
-        job.title.toLowerCase().includes(filters.keyword.toLowerCase()) ||
-        job.description.toLowerCase().includes(filters.keyword.toLowerCase())
+        job?.title.toLowerCase().includes(filters.keyword.toLowerCase()) ||
+        job?.description.toLowerCase().includes(filters.keyword.toLowerCase())
       );
     }
     

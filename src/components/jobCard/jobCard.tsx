@@ -4,6 +4,7 @@ import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export const JobCard = ({
   _id,
@@ -16,6 +17,7 @@ export const JobCard = ({
   description,
 }: any) => {
   const session = useSession();
+  const router = useRouter();
   const getTypeColor = () => {
     switch (jobType) {
       case "Full-time":
@@ -29,14 +31,12 @@ export const JobCard = ({
     }
   };
 
-  console.log("session", session);
-  
   const handleClick = () => {
     const user = session?.data?.user;
-    if (user) {
-      Router.push
+    if (!user) {
+      router.push("/login");
     }
-  }
+  };
 
   return (
     <div className="mx-auto">
@@ -70,12 +70,15 @@ export const JobCard = ({
             </div>
           </div>
 
-          <Link href={`/jobs/${_id}`}>
-            <Button onClick={handleClick} className="w-full bg-gradient-to-r from-blue-700 to-blue-400 text-white">
+          <Button
+            onClick={handleClick}
+            className="w-full bg-gradient-to-r from-blue-700 to-blue-400 text-white"
+          >
+            <Link href={`/jobs/${_id}`} className="flex">
               Apply Now
               <ArrowRight className="h-4 w-4 ml-2" />
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </div>
       </Card>
     </div>
