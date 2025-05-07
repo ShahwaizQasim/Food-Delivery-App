@@ -17,14 +17,24 @@ export async function POST(request: NextRequest) {
 
     let resumeFileUrl = undefined;
 
+    const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2 MB in bytes
+
     if (resumeUrl && resumeUrl.size > 0) {
+      if (resumeUrl.size > MAX_FILE_SIZE) {
+        return NextResponse.json(
+          { message: "File size exceeds 2MB limit" },
+          { status: 400 }
+        );
+      }
       try {
         const buffer = await resumeUrl.arrayBuffer();
         const base64Image = Buffer.from(buffer).toString("base64");
         const uploadedImage = await cloudinary.uploader.upload(
           `data:${resumeUrl.type};base64,${base64Image}`,
           {
+            resource_type: "auto",
             folder: "Job Applications", // Replace this with your desired folder name
+            access_mode: "public",
           }
         );
 
