@@ -6,6 +6,7 @@ import SessionProviderWrapper from "./sessionProvider";
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar/navbar";
 import Footer from "@/components/footer/footer";
+import MouseFollower from "@/components/mouseMove/mouseMove";
 
 // export const metadata: Metadata = {
 //   title: "Create Next App",
@@ -29,16 +30,18 @@ export default function RootLayout({
     "/dashboard/applicationReviews",
     "/dashboard/adminProfile",
   ];
-  const shouldhideNavbar = hideNavbarPaths.includes(pathname) || pathname.includes("not-found");
+  const shouldhideNavbar =
+    hideNavbarPaths.includes(pathname) || pathname.includes("not-found");
 
   return (
     <html lang="en">
       <body>
-        <SessionProviderWrapper>
-          {!shouldhideNavbar && <Navbar />}
-          {children}
-          {!shouldhideNavbar && <Footer />}
-        </SessionProviderWrapper>
+        <MouseFollower />
+          <SessionProviderWrapper>
+            {!shouldhideNavbar && <Navbar />}
+            {children}
+            {!shouldhideNavbar && <Footer />}
+          </SessionProviderWrapper>
       </body>
     </html>
   );
