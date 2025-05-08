@@ -116,71 +116,69 @@ const Navbar = () => {
               <div className="h-10 w-[100px] bg-white animate-pulse"></div>
             ) : status === "authenticated" ? (
               <div className="flex items-center space-x-4">
-                <Link href="/profile">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <button className="flex items-center space-x-3 p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                        <div className="h-8 w-8 outline-none rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-medium border-2 border-blue-500">
-                          {session?.user?.name?.charAt(0) || "U"}
-                        </div>
-                        <ChevronDown
-                          size={16}
-                          className="text-gray-500 dark:text-gray-300"
-                        />
-                      </button>
-                    </DropdownMenuTrigger>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button className="flex items-center space-x-3 p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                      <div className="h-8 w-8 outline-none rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-medium border-2 border-blue-500">
+                        {session?.user?.name?.charAt(0) || "U"}
+                      </div>
+                      <ChevronDown
+                        size={16}
+                        className="text-gray-500 dark:text-gray-300"
+                      />
+                    </button>
+                  </DropdownMenuTrigger>
 
-                    <DropdownMenuContent className="w-56 bg-white text-gray-900">
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem className="cursor-pointer">
-                        <Link href="/">
-                          <div className="flex items-center space-x-2">
-                            <HomeIcon size={16} />
-                            <span>Home</span>
-                          </div>
-                        </Link>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem className="cursor-pointer">
-                        <Link href="/jobs">
-                          <div className="flex items-center space-x-2">
-                            <Briefcase size={16} />
-                            <span>Jobs</span>
-                          </div>
-                        </Link>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem className="cursor-pointer">
-                        <Link href="/profile">
-                          <div className="flex items-center space-x-2">
-                            <User2Icon size={16} />
-                            <span>Profile</span>
-                          </div>
-                        </Link>
-                      </DropdownMenuItem>
-                      {session?.user?.isAdmin ? (
-                        <DropdownMenuItem className="cursor-pointer">
-                          <Link href="/dashboard">
-                            <div className="flex items-center space-x-2">
-                              <CircleGauge size={16} />
-                              <span>Dashboard</span>
-                            </div>
-                          </Link>
-                        </DropdownMenuItem>
-                      ) : (
-                        ""
-                      )}
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem
-                        onClick={handleSignOut}
-                        className="text-red-600 dark:text-red-400 cursor-pointer"
-                      >
+                  <DropdownMenuContent className="w-56 bg-white text-gray-900">
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem className="cursor-pointer hover:bg-gray-100">
+                      <Link href="/">
                         <div className="flex items-center space-x-2">
-                          <LogOut size={16} />
-                          <span>Sign out</span>
+                          <HomeIcon size={16} />
+                          <span>Home</span>
                         </div>
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="cursor-pointer hover:bg-gray-100">
+                      <Link href="/jobs">
+                        <div className="flex items-center space-x-2">
+                          <Briefcase size={16} />
+                          <span>Jobs</span>
+                        </div>
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="cursor-pointer hover:bg-gray-100">
+                      <Link href="/profile">
+                        <div className="flex items-center space-x-2">
+                          <User2Icon size={16} />
+                          <span>Profile</span>
+                        </div>
+                      </Link>
+                    </DropdownMenuItem>
+                    {session?.user?.isAdmin ? (
+                      <DropdownMenuItem className="cursor-pointer hover:bg-gray-100">
+                        <Link href="/dashboard">
+                          <div className="flex items-center space-x-2">
+                            <CircleGauge size={16} />
+                            <span>Dashboard</span>
+                          </div>
+                        </Link>
                       </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </Link>
+                    ) : (
+                      ""
+                    )}
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      onClick={handleSignOut}
+                      className="text-red-600 dark:text-red-400 cursor-pointer"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <LogOut size={16} />
+                        <span>Sign out</span>
+                      </div>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
             ) : (
               <div className="flex items-center space-x-3">
@@ -218,31 +216,41 @@ const Navbar = () => {
           <div className="md:hidden mt-4 pb-4 space-y-3 animate-fadeIn">
             <Link
               href="/"
-              className="flex items-center text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-md p-2 font-medium"
+              className="flex items-center text-blue-700 hover:text-blue-600 hover:bg-blue-50 rounded-md p-2 font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
               Home
             </Link>
             <Link
               href="/jobs"
-              className="flex items-center gap-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-md p-2 font-medium"
+              className="flex items-center gap-2 text-blue-700 hover:text-blue-600 hover:bg-blue-50 rounded-md p-2 font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
               Jobs
             </Link>
             <Link
               href="/about"
-              className="flex items-center text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-md p-2 font-medium"
+              className="flex items-center text-blue-700 hover:text-blue-600 hover:bg-blue-50 rounded-md p-2 font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
               About
             </Link>
+            {status === "authenticated" ? (
+              <Button
+                onClick={handleSignOut}
+                className="text-red-400 hover:text-red-800 cursor-pointer  p-2"
+              >
+                Logout
+              </Button>
+            ) : (
+              ""
+            )}
 
             <div className="flex flex-col space-y-2 pt-3 border-t border-gray-200 mt-3">
               {status === "authenticated" ? (
                 <div className="flex items-center justify-between p-2">
                   <div className="flex items-center gap-2">
-                    <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-medium border-2 border-green-500">
+                    <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-medium border-2 border-blue-500">
                       {session?.user?.name?.charAt(0) || "U"}
                     </div>
                     <span className="font-medium text-gray-700">
@@ -253,7 +261,7 @@ const Navbar = () => {
                     <Button
                       size="sm"
                       variant="outline"
-                      className="text-xs border-green-500 text-green-600"
+                      className="text-xs border-blue-500 text-blue-600"
                     >
                       Profile
                     </Button>
@@ -264,14 +272,14 @@ const Navbar = () => {
                   <Link href="/login" onClick={() => setIsMenuOpen(false)}>
                     <Button
                       variant="outline"
-                      className="w-full border-green-500 text-green-600 hover:bg-green-500 hover:text-white flex items-center justify-center gap-2"
+                      className="w-full border-blue-500 text-blue-600 hover:bg-blue-500 hover:text-white flex items-center justify-center gap-2"
                     >
                       <LogIn size={16} />
                       Login
                     </Button>
                   </Link>
                   <Link href="/signup" onClick={() => setIsMenuOpen(false)}>
-                    <Button className="w-full bg-green-500 hover:bg-green-600 text-white flex items-center justify-center gap-2">
+                    <Button className="w-full bg-blue-500 hover:bg-blue-600 text-white flex items-center justify-center gap-2">
                       <User size={16} />
                       Sign Up
                     </Button>

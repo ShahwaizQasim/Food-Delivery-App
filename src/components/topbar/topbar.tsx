@@ -84,7 +84,7 @@ const Topbar = ({ toggleSidebar, expanded }: TopbarProps) => {
                   </div>
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer">
+              <DropdownMenuItem className="cursor-pointer hover:bg-gray-100">
                 <Link href="/jobs">
                   <div className="flex items-center space-x-2">
                     <Briefcase size={16} />

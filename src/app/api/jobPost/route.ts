@@ -22,7 +22,7 @@ export async function GET() {
     await ConnectDB();
     const jobPostDataGet = await JobPostModel.find();
     return NextResponse.json(
-      { error: false, msg: "Job Post Successfully", jobsData: jobPostDataGet },
+      { error: false, msg: "Job Fetch Successfully", jobsData: jobPostDataGet },
       { status: 200 }
     );
   } catch (error) {

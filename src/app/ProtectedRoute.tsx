@@ -19,11 +19,6 @@ export default function ProtectedRoute({
     }
   }, [status, router,session]);
 
-  useEffect(() => {
-    console.log("Session:", session);
-    console.log("Status:", status);
-  }, [session, status]);
-
   if (status == "loading") {
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-75 z-50">
